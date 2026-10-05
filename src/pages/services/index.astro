@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import Process from '../../components/Process.astro';
+import CTA from '../../components/CTA.astro';
+import Icon from '../../components/Icon.astro';
+import { values } from '../../data/site';
+---
+<Layout title="Construction, Repair & Structural Services" description="Ten services from M.M. Construction & Consults: NDT & structural audit, structural repair, CF wrapping, waterproofing, terrace waterproofing, painting, plumbing, paver work and core testing.">
+  <PageHero label="Our services" title="Complete repair &<br/>structural solutions." text="From structural audit to waterproofing and finishing — practical services for your building’s condition, protection and everyday use." image="/images/optimized/ndt-upv.webp" alt="Engineer testing a concrete column with UPV equipment" />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading label="Assessment · Repair · Strengthening · Protection" title="The right work starts with understanding the need." text="Choose the service that fits your concern, or speak to our team if you are unsure where to begin." />
+      <ServiceGrid detailed={true} />
+      <p class="service-footnote">Some service photographs are representative illustrations; real work from our sites is shown in the project gallery and videos.</p>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="Our approach" title="Careful planning. Clear expectations." />
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <article class="value-card lift-card reveal" style={`--delay:${i * 80}ms`}><Icon name={v.icon} size={32} /><h3>{v.title}</h3><p>{v.text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Process />
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="From our sites" title="Selected work records." href="/projects" link="View project gallery" />
+      <ProjectGrid filters={false} limit={4} />
+    </div>
+  </section>
+  <CTA />
+</Layout>

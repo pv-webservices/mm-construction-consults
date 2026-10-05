@@ -1,0 +1,25 @@
+---
+import { process } from '../data/site';
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<section class:list={['section', 'process-section', { light }]} id="process">
+  <div class="container">
+    <SectionHeading label="Our work process" title="From Inspection to a Stronger Structure" />
+    <ol class="process-grid">
+      {process.map((p, i) => (
+        <li class="process-step reveal" style={`--delay:${i * 90}ms`}>
+          <div class="process-icon">
+            <span class="process-number">{i + 1}</span>
+            <Icon name={p.icon} size={30} />
+          </div>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

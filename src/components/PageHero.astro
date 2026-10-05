@@ -1,0 +1,26 @@
+---
+import Picture from './Picture.astro';
+
+interface Props { label: string; title: string; text: string; image?: string; alt?: string; parent?: string; parentHref?: string }
+const {
+  label, title, text,
+  image = '/images/optimized/scaffold.webp',
+  alt = 'M.M. Construction building repair work with scaffolding',
+  parent, parentHref,
+} = Astro.props;
+const headingLines = title.split(/<br\s*\/?>/);
+---
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <Picture src={image} alt={alt} eager={true} sizes="100vw" />
+  </div>
+  <div class="container page-hero-inner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span>
+      {parent && <><a href={parentHref}>{parent}</a><span aria-hidden="true">/</span></>}
+      <span aria-current="page">{label}</span>
+    </nav>
+    <h1>{headingLines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</h1>
+    <p class="page-lead">{text}</p>
+  </div>
+</section>

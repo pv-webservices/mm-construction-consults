@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+
+interface Props { label: string; title: string; text?: string; href?: string; link?: string; center?: boolean; dark?: boolean }
+const { label, title, text, href, link, center = false, dark = false } = Astro.props;
+---
+<div class:list={['section-heading', { center, dark }]}>
+  <div>
+    <p class="eyebrow">{label}</p>
+    <h2>{title}</h2>
+    {text && <p class="section-intro">{text}</p>}
+  </div>
+  {href && (
+    <a class="text-link" href={href}>{link || 'Explore more'} <Icon name="arrow-right" size={17} /></a>
+  )}
+</div>

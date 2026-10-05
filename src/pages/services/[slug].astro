@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import Picture from '../../components/Picture.astro';
+import Process from '../../components/Process.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import CTA from '../../components/CTA.astro';
+import Icon from '../../components/Icon.astro';
+import { services } from '../../data/services';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props;
+const related = services
+  .filter((s) => s.slug !== service.slug)
+  .sort((a, b) => Number(b.category === service.category) - Number(a.category === service.category))
+  .slice(0, 4);
+const panels = [
+  { title: 'Concerns we address', items: service.problems, icon: 'scan-search' },
+  { title: 'Scope of work', items: service.scope, icon: 'clipboard-list' },
+  { title: 'What you gain', items: service.benefits, icon: 'shield-check' },
+];
+---
+<Layout title={service.title} description={`${service.short} ${service.title} by M.M. Construction & Consults in Mumbai and Maharashtra — scope of work and our approach.`}>
+  <PageHero label={service.title} title={service.title} text={service.short} image={service.image} alt={service.alt} parent="Services" parentHref="/services" />
+
+  <section class="section">
+    <div class="container content-grid">
+      <div class="prose reveal">
+        <p class="eyebrow">{service.category}</p>
+        <h2>A solution shaped by your building.</h2>
+        <div class="split-media service-media">
+          <Picture src={service.image} alt={service.alt} sizes="(max-width: 900px) 100vw, 30vw" />
+          <ul class="service-points">{service.points.map((p) => <li>{p}</li>)}</ul>
+        </div>
+        <p>{service.description}</p>
+        <p>The exact treatment, investigation, materials and sequence are agreed after reviewing the site and its requirements. We explain the proposed scope clearly before execution starts.</p>
+      </div>
+      <aside class="content-aside">
+        <h2>Start with a conversation.</h2>
+        <p>Tell us about the building and the concern you want to address — we’ll suggest the next step.</p>
+        <a class="button" href={`/contact?service=${encodeURIComponent(service.title)}`}>Enquire about this service <Icon name="arrow-right" size={17} /></a>
+        {site.phones.slice(0, 2).map((p) => <a href={p.href}><Icon name="phone" size={16} />{p.label}</a>)}
+      </aside>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container detail-columns">
+      {panels.map((panel, i) => (
+        <article class="detail-panel lift-card reveal" style={`--delay:${i * 80}ms`}>
+          <Icon name={panel.icon} size={30} />
+          <h2>{panel.title}</h2>
+          <ul>{panel.items.map((item) => <li>{item}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Process />
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="Real work" title="From our project gallery." href="/projects" link="Explore our work" />
+      <ProjectGrid filters={false} limit={4} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading label="Related services" title="Explore the next part of the picture." href="/services" link="All services" />
+      <ServiceGrid detailed={true} items={related} />
+    </div>
+  </section>
+  <CTA />
+</Layout>

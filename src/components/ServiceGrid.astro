@@ -1,0 +1,27 @@
+---
+import { services, type Service } from '../data/services';
+import Icon from './Icon.astro';
+import Picture from './Picture.astro';
+
+interface Props { detailed?: boolean; items?: Service[] }
+const { detailed = false, items = services } = Astro.props;
+---
+<div class:list={['service-grid', { detailed }]}>
+  {items.map((s, i) => (
+    <a class="service-card lift-card reveal" href={`/services/${s.slug}`} style={`--delay:${(i % 5) * 60}ms`}>
+      <div class="card-image">
+        <Picture src={s.image} alt={s.alt} sizes="(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 20vw" />
+      </div>
+      <div class="service-copy">
+        <span class="service-index">{i + 1}</span>
+        <div>
+          <h3>{s.title}</h3>
+          {detailed ? <p>{s.short}</p> : (
+            <ul class="service-points">{s.points.map((p) => <li>{p}</li>)}</ul>
+          )}
+        </div>
+        <span class="card-arrow" aria-hidden="true"><Icon name="arrow-up-right" size={16} /></span>
+      </div>
+    </a>
+  ))}
+</div>

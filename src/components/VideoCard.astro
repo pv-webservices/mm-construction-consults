@@ -1,0 +1,27 @@
+---
+import type { Video } from '../data/projects';
+import Icon from './Icon.astro';
+import Picture from './Picture.astro';
+
+interface Props { video: Video; featured?: boolean; showText?: boolean }
+const { video, featured = false, showText = true } = Astro.props;
+---
+<a
+  class:list={['video-card', 'lift-card', 'reveal', { featured, landscape: video.landscape }]}
+  href={`/videos/${video.id}`}
+  data-video={`/videos/selected/${video.id}.mp4`}
+  data-title={video.title}
+  data-landscape={video.landscape ? 'true' : undefined}
+>
+  <div class="video-poster">
+    <Picture src={video.poster} alt={`Still from the video: ${video.title}`} sizes={featured ? '(max-width: 900px) 100vw, 60vw' : '(max-width: 640px) 100vw, 25vw'} />
+    <span class="play" aria-hidden="true"><Icon name="play" size={featured ? 30 : 22} /></span>
+    <span class="video-tag">{video.category}</span>
+    <span class="video-duration">{video.duration}</span>
+  </div>
+  <div class="video-copy">
+    <h3>{video.title}</h3>
+    {showText && <p>{video.description}</p>}
+    <span class="video-cta">Watch video <Icon name="arrow-right" size={15} /></span>
+  </div>
+</a>

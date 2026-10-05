@@ -1,0 +1,36 @@
+---
+import { projects } from '../data/projects';
+import Icon from './Icon.astro';
+import Picture from './Picture.astro';
+
+interface Props { filters?: boolean; limit?: number }
+const { filters = true, limit = projects.length } = Astro.props;
+const items = projects.slice(0, limit);
+const categories = [...new Set(items.map((p) => p.category))];
+---
+<div data-project-gallery>
+  {filters && (
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" data-filter="All" class="active" aria-pressed="true">All</button>
+      {categories.map((c) => <button type="button" data-filter={c} aria-pressed="false">{c}</button>)}
+    </div>
+  )}
+  <p class="sr-only" data-filter-status aria-live="polite"></p>
+  <div class="project-grid">
+    {items.map((p, i) => (
+      <article class="project-card lift-card reveal" data-category={p.category} style={`--delay:${(i % 4) * 70}ms`}>
+        <a href={`/projects/${p.slug}`}>
+          <div class="card-image">
+            <Picture src={p.image} alt={p.alt} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw" />
+            <span class="project-tag">{p.category}</span>
+            <span class="project-overlay"><span>View project</span><Icon name="arrow-up-right" size={18} /></span>
+          </div>
+          <div class="project-copy">
+            <h3>{p.title}</h3>
+            <p class="project-location"><Icon name="map-pin" size={15} />{p.location}</p>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+</div>

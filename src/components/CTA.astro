@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<section class="cta-section" aria-labelledby="cta-title">
+  <div class="container cta-inner">
+    <div class="cta-copy">
+      <h2 id="cta-title">Let’s Build a Safer &amp; Stronger Tomorrow</h2>
+      <p>Get expert consultation for your next project in {site.serviceArea}.</p>
+    </div>
+    <div class="cta-phones">
+      <span class="cta-phone-icon"><Icon name="phone" size={24} /></span>
+      <div>{site.phones.map((p) => <a href={p.href}>{p.label}</a>)}</div>
+    </div>
+    <div class="cta-actions">
+      <a class="button light-hover" href="/contact">Contact Us Today <Icon name="arrow-right" size={18} /></a>
+      <div class="social-links">
+        <a href={site.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={20} /></a>
+        <a href={site.facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={20} /></a>
+        <a href={`https://wa.me/${site.whatsapp}`} aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><Icon name="message-circle" size={20} /></a>
+      </div>
+    </div>
+  </div>
+</section>

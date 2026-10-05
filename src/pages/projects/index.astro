@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import VideoGrid from '../../components/VideoGrid.astro';
+import CTA from '../../components/CTA.astro';
+---
+<Layout title="Projects & Our Work" description="Real work photographs and site records from M.M. Construction & Consults: building rehabilitation, RCC column repair, column jacketing, NDT and core testing in Mumbai.">
+  <PageHero label="Projects" title="Work you can see.<br/>Details that matter." text="Photographs and site records from our own projects — from investigation to complete building rehabilitation." image="/images/optimized/scaffold.webp" alt="Residential building under repair with scaffolding" />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading label="Recent projects" title="A closer look at our sites." text="Filter the gallery by type of work. Open a project to see the photographs and footage." />
+      <ProjectGrid />
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="Site execution" title="See the work in progress." href="/videos" link="All videos" />
+      <VideoGrid limit={4} />
+    </div>
+  </section>
+  <CTA />
+</Layout>

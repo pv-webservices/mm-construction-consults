@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { navigation } from '../data/site';
+import { services } from '../data/services';
+import { projects, allVideos } from '../data/projects';
+---
+<Layout title="Website Sitemap" description="Find every service, project record, selected video, and contact page on the M.M. Construction & Consults website.">
+<PageHero label="Sitemap" title="Find your way around." text="Explore the company, services, work records, and enquiry options."/>
+<section class="section"><div class="container legal"><h2>Explore the website</h2><ul class="sitemap-list">{navigation.map((n)=><li><a href={n.href}>{n.name} →</a></li>)}</ul><h2>Services</h2><ul class="sitemap-list">{services.map(s=><li><a href={`/services/${s.slug}`}>{s.title} →</a></li>)}</ul><h2>Work records</h2><ul class="sitemap-list">{projects.map(p=><li><a href={`/projects/${p.slug}`}>{p.title} →</a></li>)}</ul><h2>Videos</h2><ul class="sitemap-list">{allVideos.map(v=><li><a href={`/videos/${v.id}`}>{v.title} →</a></li>)}</ul><h2>Website information</h2><ul class="sitemap-list"><li><a href="/privacy-policy">Privacy Policy →</a></li><li><a href="/terms-conditions">Terms & Conditions →</a></li></ul></div></section>
+</Layout>

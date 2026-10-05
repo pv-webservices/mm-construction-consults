@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import Icon from '../../components/Icon.astro';
+import CTA from '../../components/CTA.astro';
+import { allVideos } from '../../data/projects';
+
+export function getStaticPaths() {
+  return allVideos.map((video) => ({ params: { slug: video.id }, props: { video } }));
+}
+const { video } = Astro.props;
+const more = allVideos.filter((v) => v.id !== video.id && !v.landscape).slice(0, 4);
+---
+<Layout title={video.title} description={`${video.description} Watch this video from M.M. Construction & Consults.`}>
+  <PageHero label={video.title} title={video.title} text={video.description} image={video.poster} alt={`Still frame from ${video.title}`} parent="Videos" parentHref="/videos" />
+
+  <section class="section">
+    <div class="container">
+      <video class:list={['video-detail', { portrait: !video.landscape }]} controls preload="none" playsinline poster={video.poster} aria-label={video.title}>
+        <source src={`/videos/selected/${video.id}.mp4`} type="video/mp4" />
+        Your browser does not support this video. <a href={`/videos/selected/${video.id}.mp4`}>Open the MP4.</a>
+      </video>
+      <p class="video-note">{video.landscape ? 'Animated brand film with narration.' : 'Silent site footage recorded on an M.M. Construction site.'}</p>
+      <div class="button-row">
+        <a class="button outline" href="/videos">All videos</a>
+        <a class="button" href="/contact">Discuss your building <Icon name="arrow-right" size={17} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="Keep watching" title="More from our sites." />
+      <div class="video-grid">{more.map((v) => <VideoCard video={v} />)}</div>
+    </div>
+  </section>
+  <CTA />
+</Layout>

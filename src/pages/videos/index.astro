@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import VideoGrid from '../../components/VideoGrid.astro';
+import Icon from '../../components/Icon.astro';
+import CTA from '../../components/CTA.astro';
+import { brandFilm } from '../../data/projects';
+import { site } from '../../data/site';
+---
+<Layout title="Project & Site Videos" description="Watch the M.M. Construction & Consults brand film and site footage of column jacketing, core cutting, rebar scanning, NDT and slab inspection.">
+  <PageHero label="Videos" title="On site.<br/>In detail." text="Our story, and real footage from the work itself — testing, investigation, jacketing and repair." image="/images/optimized/video-3.webp" alt="Column jacketing reinforcement on site" />
+
+  <section class="section">
+    <div class="container featured-film">
+      <VideoCard video={brandFilm} featured={true} />
+      <div class="prose reveal">
+        <p class="eyebrow">Brand film</p>
+        <h2>Why every building needs a doctor.</h2>
+        <p>{brandFilm.description}</p>
+        <p>Cracks, seepage and exposed reinforcement get worse — and costlier — with time. A timely structural audit and the right repair keep your home safe.</p>
+        <div class="button-row">
+          <a class="button" href="/contact">Book an Inspection <Icon name="arrow-right" size={17} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="Site execution videos" title="See the process at work." text="Silent site clips. Tap any video to play it." />
+      <VideoGrid />
+      <div class="more-videos reveal">
+        <span class="more-videos-icon"><Icon name="instagram" size={24} /></span>
+        <p><strong>More updates on Instagram</strong>Follow our latest site work and project reels.</p>
+        <div class="button-row"><a class="button" href={site.instagram} target="_blank" rel="noopener noreferrer">Follow Us <Icon name="arrow-right" size={17} /></a></div>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Layout>

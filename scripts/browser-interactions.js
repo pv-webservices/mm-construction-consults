@@ -1,0 +1,78 @@
+async (page) => {
+  const base='http://127.0.0.1:4330';
+  const report={passed:[],failed:[],videos:[]};
+  const check=(condition,name)=>{(condition?report.passed:report.failed).push(name);};
+  await page.setViewportSize({width:375,height:900});
+  await page.goto(base);
+  await page.getByRole('button',{name:'Open navigation',exact:true}).click();
+  check(await page.locator('#main-nav').isVisible(),'Mobile navigation opens');
+  check(await page.locator('#main-nav a').count()===9,'Mobile navigation has every route, quote, and phone link');
+  await page.keyboard.press('Escape');
+  check(!await page.locator('#main-nav').isVisible(),'Escape closes mobile navigation');
+  check(await page.getByRole('button',{name:'Open navigation',exact:true}).evaluate(el=>el===document.activeElement),'Menu returns keyboard focus');
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto(base+'/projects');
+  const filterButtons=page.locator('[data-filter]');
+  for(let i=0;i<await filterButtons.count();i++){
+    const button=filterButtons.nth(i),filter=await button.getAttribute('data-filter');
+    await button.click();
+    const matching=await page.locator('[data-category]').evaluateAll((cards,value)=>cards.every(card=>card.hidden === (value!=='All'&&card.dataset.category!==value)),filter);
+    check(matching,`Project filter: ${filter}`);
+    check(await button.getAttribute('aria-pressed')==='true',`Project filter pressed state: ${filter}`);
+  }
+  await page.goto(base+'/videos');
+  check(await page.locator('video[src]').count()===0,'Video gallery loads no video source before opening');
+  const links=page.locator('[data-video]');
+  for(let i=0;i<await links.count();i++){
+    const link=links.nth(i),title=await link.getAttribute('data-title');
+    await link.click();
+    const video=page.locator('#video-modal video');
+    await video.evaluate(el=>new Promise((resolve,reject)=>{if(el.readyState>=1)return resolve(true);el.addEventListener('loadedmetadata',()=>resolve(true),{once:true});el.addEventListener('error',()=>reject(new Error('Video decoding error')),{once:true});}));
+    check(await video.evaluate(el=>el.paused),`${title}: no autoplay`);
+    const result=await video.evaluate(async el=>{await el.play();await new Promise(r=>setTimeout(r,350));const result={duration:el.duration,time:el.currentTime,width:el.videoWidth,height:el.videoHeight,error:el.error?.message||null};el.pause();return result;});
+    report.videos.push({title,...result});
+    check(result.time>0 && !result.error,`${title}: playback works`);
+    await page.keyboard.press('Escape');
+    check(!await page.locator('#video-modal').isVisible(),`${title}: Escape closes modal`);
+    check(await link.evaluate(el=>el===document.activeElement),`${title}: focus returns to thumbnail`);
+  }
+  await page.goto(base+'/contact?service=Terrace%20Waterproofing');
+  check(await page.locator('#service').inputValue()==='Terrace Waterproofing','Service enquiry preselects relevant service');
+  await page.getByRole('button',{name:'Enquire on WhatsApp',exact:true}).click();
+  check(!await page.locator('#enquiry-result').isVisible(),'Empty form remains invalid');
+  await page.getByLabel('Your name').fill('Synthetic QA Visitor');
+  await page.getByLabel('Mobile number').fill('12345');
+  await page.getByLabel('Project location').fill('Synthetic test location');
+  await page.getByLabel('Tell us about the project').fill('Synthetic test enquiry. No message will be sent.');
+  await page.getByRole('button',{name:'Enquire on WhatsApp',exact:true}).click();
+  check(await page.locator('#phone').evaluate(el=>!el.checkValidity()),'Invalid mobile number is rejected');
+  await page.getByLabel('Mobile number').fill('+91 98765 43210');
+  await page.getByLabel('Email (optional)').fill('invalid-email');
+  await page.getByRole('button',{name:'Enquire on WhatsApp',exact:true}).click();
+  check(await page.locator('#email').evaluate(el=>!el.checkValidity()),'Invalid email is rejected');
+  await page.getByLabel('Email (optional)').fill('synthetic@example.com');
+  await page.evaluate(()=>{window.__qaOpenedUrl='';window.open=url=>{window.__qaOpenedUrl=String(url);return null;};});
+  await page.getByRole('button',{name:'Enquire on WhatsApp',exact:true}).click();
+  const draft=await page.locator('#enquiry-draft').textContent();
+  const opened=await page.evaluate(()=>window.__qaOpenedUrl);
+  check(opened.startsWith('https://wa.me/919768737810?text='),'Form opens confirmed WhatsApp destination');
+  check(new URL(opened).searchParams.get('text')===draft,'WhatsApp message matches visible enquiry draft');
+  check(draft.includes('Synthetic QA Visitor')&&draft.includes('Terrace Waterproofing')&&draft.includes('Synthetic test location'),'WhatsApp draft contains submitted fields');
+  check(await page.locator('#enquiry-result').isVisible(),'Visible fallback enquiry result');
+  check(await page.locator('#open-whatsapp').getAttribute('href')===opened,'Fallback WhatsApp link is correct');
+  check(await page.locator('#enquiry-result').textContent().then(text=>text.includes('tap Send')),'No false delivered-success claim');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto(base);
+  check(await page.locator('.will-reveal').count()===0,'Reduced motion preserves all content without reveals');
+  const scriptsDisabled=await page.context().browser().newContext({javaScriptEnabled:false,viewport:{width:375,height:900}});
+  const noJs=await scriptsDisabled.newPage();
+  await noJs.goto(base+'/videos');
+  check(await noJs.locator('[data-video]').count()===6,'No-JavaScript video route fallbacks exist');
+  await noJs.goto(base+'/contact');
+  check(await noJs.locator('noscript').isVisible(),'No-JavaScript enquiry fallback is visible');
+  check(await noJs.getByRole('button',{name:'Enquire on WhatsApp',exact:true}).isDisabled(),'No-JavaScript form cannot expose fields in a GET request');
+  await scriptsDisabled.close();
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto(base);
+  return report;
+}

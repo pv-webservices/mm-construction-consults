@@ -1,0 +1,28 @@
+---
+import manifest from '../data/media.json';
+
+interface Props { src: string; alt: string; class?: string; eager?: boolean; sizes?: string }
+const { src, alt, class: className, eager = false, sizes = '(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw' } = Astro.props;
+
+type Size = { width: number; height: number };
+const media = manifest as Record<string, Size>;
+const dimensions = media[src] || { width: 960, height: 720 };
+// Smaller variants are written as name-<width>.webp next to the largest file.
+const base = src.replace(/\.webp$/, '');
+const variants = Object.keys(media).filter((key) => key === src || new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-\\d+\\.webp$`).test(key));
+const srcset = variants.length > 1
+  ? variants.sort((a, b) => media[a].width - media[b].width).map((key) => `${key} ${media[key].width}w`).join(', ')
+  : undefined;
+---
+<img
+  src={src}
+  srcset={srcset}
+  sizes={srcset ? sizes : undefined}
+  alt={alt}
+  class={className}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding="async"
+  width={dimensions.width}
+  height={dimensions.height}
+/>

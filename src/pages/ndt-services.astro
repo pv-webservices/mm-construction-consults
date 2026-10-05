@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Process from '../components/Process.astro';
+import CTA from '../components/CTA.astro';
+import { tests } from '../data/services';
+import { videos } from '../data/projects';
+
+const ndtVideos = videos.filter((v) => v.category === 'NDT' || v.category === 'Testing').slice(0, 4);
+const faqs = [
+  ['Does one NDT test confirm structural safety?', 'No. Different tests provide different evidence. Readings are interpreted together with site observations, building information and an engineering assessment.'],
+  ['Is concrete core testing non-destructive?', 'No. A core is physically removed from the concrete, so sampling locations, reinforcement and reinstatement are planned as part of the investigation.'],
+  ['Can you recommend a test before visiting the site?', 'We can discuss your concerns first, but suitable methods and locations depend on the structure, access and the question the investigation needs to answer.'],
+  ['What should I share when making an enquiry?', 'The property location, a description of the concern, and any drawings, previous reports or photographs of visible damage.'],
+];
+---
+<Layout title="NDT & Structural Testing" description="UPV, rebound hammer, core testing, thermal imaging, rebar detection and visual inspection by M.M. Construction & Consults for structural audits in Mumbai.">
+  <PageHero label="NDT & structural testing" title="Look deeper.<br/>Make informed decisions." text="Non-destructive testing, sampling and documentation that show what the surface can’t tell you." image="/images/optimized/ndt-upv.webp" alt="Engineer performing ultrasonic pulse velocity testing on a concrete column" />
+
+  <section class="section">
+    <div class="container content-grid">
+      <div class="prose reveal">
+        <p class="eyebrow">Understand before you repair</p>
+        <h2>What is non-destructive testing?</h2>
+        <p>Non-destructive testing (NDT) investigates the condition of concrete and reinforcement with little or no disturbance to the structure. Each technique answers a different question, so the right combination matters.</p>
+        <p>Visual observations, building records and test results are considered together. Where direct material information is needed, core extraction is planned separately as an intrusive investigation.</p>
+        <p>The result is an evidence-based picture of your building — the foundation for the right repair, strengthening or maintenance decision.</p>
+      </div>
+      <aside class="content-aside">
+        <h2>Which tests does your building need?</h2>
+        <p>Share your concern with our team and we’ll discuss the right assessment approach.</p>
+        <a class="button" href="/contact?service=NDT%20%26%20Structural%20Audit">Discuss an assessment <Icon name="arrow-right" size={17} /></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section ndt-section">
+    <div class="container">
+      <SectionHeading label="Testing & investigation" title="A range of tools. One clear assessment." text="Each technique has a purpose and limits. Methods are selected to suit the site and the question being investigated." dark={true} />
+      <div class="testing-grid ndt-tests">
+        {tests.map((t, i) => (
+          <article class="test-card lift-card reveal" style={`--delay:${i * 60}ms`}>
+            <div class="card-image"><Picture src={t.image} alt={t.title} sizes="(max-width: 640px) 50vw, 33vw" /></div>
+            <div class="test-copy">
+              <span class="test-number">{i + 1}</span>
+              <div class="test-title"><Icon name={t.icon} size={20} /><h3>{t.title}</h3></div>
+              <p>{t.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="ndt-note"><Icon name="info" size={17} />Test results are assessed alongside site observations and building information. No single test establishes structural safety.</p>
+    </div>
+  </section>
+
+  <Process />
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="On-site investigation" title="Testing in the field." href="/videos" link="All videos" />
+      <div class="video-grid">{ndtVideos.map((v) => <VideoCard video={v} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading label="Common questions" title="A clearer understanding of testing." />
+      <div class="faq">
+        {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Layout>

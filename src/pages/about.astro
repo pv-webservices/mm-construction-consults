@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import Process from '../components/Process.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import VideoCard from '../components/VideoCard.astro';
+import CTA from '../components/CTA.astro';
+import { values, site, stats } from '../data/site';
+import { brandFilm } from '../data/projects';
+---
+<Layout title="About Our Company" description="Meet M.M. Construction & Consults and Er. Mukesh Triveni Gupta — structural consultants and contractors for repair, rehabilitation, NDT and waterproofing in Mumbai.">
+  <PageHero label="About us" title="Your building’s doctor —<br/>engineering you can trust." text="Structural consulting, testing and repair work led by engineers, delivered by skilled teams across Mumbai and Maharashtra." image="/images/optimized/completed.webp" alt="Residential building exterior completed by M.M. Construction" />
+
+  <section class="section">
+    <div class="container about-grid">
+      <div class="about-image reveal">
+        <Picture src="/images/optimized/scaffold.webp" alt="Building rehabilitation in progress by M.M. Construction" sizes="(max-width: 900px) 100vw, 45vw" />
+        <div class="about-inset"><Picture src="/images/optimized/repair.webp" alt="Before and after column repair" sizes="180px" /></div>
+        <div class="experience-badge"><strong>{stats[2].value}{stats[2].suffix}</strong><span>Years of<br />Experience</span></div>
+      </div>
+      <div class="about-copy prose reveal">
+        <p class="eyebrow">Who we are</p>
+        <h2>Solutions for the whole life of your building.</h2>
+        <p>M.M. Construction &amp; Consults works across civil repair, structural rehabilitation, consulting, non-destructive testing, waterproofing and building maintenance for residential, commercial and industrial structures.</p>
+        <p>Every project starts with understanding the existing structure — what you can see, and what testing can reveal. We then recommend a practical repair or strengthening scope and execute it with trained, supervised teams.</p>
+        <p>From a single column repair to the complete rehabilitation of a society building, we value clear communication, careful preparation and quality that lasts.</p>
+        <a class="button" href="/services">Explore our services <Icon name="arrow-right" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <SectionHeading label="What guides us" title="Safe. Durable. Reliable. Cost-effective." />
+      <div class="values-grid">
+        {values.map((v, i) => (
+          <article class="value-card lift-card reveal" style={`--delay:${i * 80}ms`}><Icon name={v.icon} size={34} /><h3>{v.title}</h3><p>{v.text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section founder-section">
+    <div class="container founder-grid">
+      <div class="founder-card reveal">
+        <p class="eyebrow">Our founder</p>
+        <div class="founder-body">
+          <div class="founder-photo"><Picture src="/images/optimized/founder.webp" alt={site.founder} sizes="200px" /></div>
+          <div>
+            <h2>{site.founder}</h2>
+            <p class="founder-role"><strong>{site.founderRole}</strong></p>
+            <blockquote><Icon name="quote" size={28} class="quote-mark" />Quality starts with understanding the structure. We assess before acting, explain what the work involves, and give every repair the preparation it deserves.</blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <VideoCard video={brandFilm} featured={true} />
+      </div>
+    </div>
+  </section>
+
+  <Process light={true} />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading label="Work speaks for itself" title="A closer look at our site work." href="/projects" link="View all projects" />
+      <ProjectGrid filters={false} limit={4} />
+    </div>
+  </section>
+  <CTA />
+</Layout>

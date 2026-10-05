@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import Picture from '../components/Picture.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Process from '../components/Process.astro';
+import CTA from '../components/CTA.astro';
+import { site, trust, values, highlights, stats } from '../data/site';
+import { assessments } from '../data/services';
+import { brandFilm, videos } from '../data/projects';
+
+const heroServices = [
+  { label: 'Structural Audit & NDT', href: '/services/ndt-structural-audit', icon: 'scan-line' },
+  { label: 'Repairs & Rehabilitation', href: '/services/structural-repairs-rehabilitation', icon: 'construction' },
+  { label: 'CF Wrapping', href: '/services/cf-wrapping-strengthening', icon: 'layers' },
+  { label: 'Waterproofing', href: '/services/waterproofing', icon: 'droplets' },
+  { label: 'External Painting', href: '/services/external-painting', icon: 'paint-roller' },
+  { label: 'Core Testing', href: '/services/concrete-core-testing', icon: 'drill' },
+];
+const homeVideos = videos.slice(0, 3);
+---
+<Layout title="Structural Repair, NDT & Waterproofing in Mumbai" description="M.M. Construction & Consults: civil repair, structural rehabilitation, NDT & structural audit, CF wrapping, waterproofing and painting for buildings across Mumbai and Maharashtra.">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="hero-eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Building ka Doctor · Mumbai &amp; Maharashtra</p>
+        <h1>Building Strength.<span>Restoring Trust.</span></h1>
+        <p class="hero-lead">Expert civil repair, retrofitting and structural consulting for residential, commercial and industrial structures — from structural audit and NDT to repairs, strengthening and waterproofing.</p>
+        <ul class="hero-services" aria-label="What we do">
+          {heroServices.map((s) => (
+            <li><a href={s.href}><Icon name={s.icon} size={16} />{s.label}</a></li>
+          ))}
+        </ul>
+        <div class="button-row">
+          <a class="button" href="/contact">Get a Free Quote <Icon name="arrow-right" size={18} /></a>
+          <a class="button outline" href="/services">Our Services <Icon name="arrow-right" size={18} /></a>
+        </div>
+        <ul class="hero-phones" aria-label="Call us">
+          {site.phones.map((p) => (
+            <li><a href={p.href}><span class="phone-dot"><Icon name="phone" size={15} /></span>{p.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <Picture src="/images/optimized/scaffold.webp" alt="M.M. Construction repair and rehabilitation work on a residential building with full scaffolding" eager={true} sizes="(max-width: 900px) 100vw, 52vw" />
+        <div class="hero-badge">
+          <span class="hero-badge-icon"><Icon name="shield-check" size={24} /></span>
+          <span><strong>Assess. Repair. Strengthen.</strong>Engineer-led work on real sites</span>
+        </div>
+        <p class="hero-caption">Stronger Structures<br />Safer Communities</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <div class="trust-strip">
+    <div class="container trust-grid">
+      {trust.map((t) => (
+        <div class="trust-item"><Icon name={t.icon} size={28} /><p><strong>{t.title}</strong>{t.text}</p></div>
+      ))}
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-image reveal">
+        <Picture src="/images/optimized/completed.webp" alt="Residential building exterior completed by M.M. Construction & Consults" sizes="(max-width: 900px) 100vw, 36vw" />
+        <div class="about-inset">
+          <Picture src="/images/optimized/repair.webp" alt="Before and after RCC column repair by our team" sizes="180px" />
+        </div>
+        <div class="experience-badge"><strong>{stats[2].value}{stats[2].suffix}</strong><span>Years of<br />Experience</span></div>
+      </div>
+      <div class="about-copy reveal">
+        <p class="eyebrow">About us</p>
+        <h2>M.M. Construction &amp; Consults</h2>
+        <p>We provide professional civil repair, retrofitting and structural consulting services with a focus on safety, quality and long-term durability.</p>
+        <p>Led by {site.founder}, our team of qualified engineers and skilled applicators helps societies, owners and businesses understand the condition of their buildings — and then repair and strengthen them the right way, across {site.serviceArea}.</p>
+        <div class="button-row">
+          <a class="button" href="/about">Know More About Us <Icon name="arrow-right" size={18} /></a>
+          <a class="text-link" href={`tel:+919768737810`}><Icon name="phone" size={16} /> {site.phones[0].label}</a>
+        </div>
+      </div>
+      <ul class="values-card reveal">
+        {values.map((v) => (
+          <li><span class="value-icon"><Icon name={v.icon} size={20} /></span><div><strong>{v.title}</strong><p>{v.text}</p></div></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section light" id="services">
+    <div class="container">
+      <SectionHeading label="Our services" title="Construction, Repair, Rehabilitation & More" text="One accountable team for every stage of your building’s life — from diagnosis to durable repair." href="/services" link="View all services" />
+      <ServiceGrid />
+    </div>
+  </section>
+
+  <!-- Advanced testing -->
+  <section class="section ndt-section">
+    <div class="container">
+      <div class="section-heading dark">
+        <div>
+          <p class="eyebrow">Why choose us</p>
+          <h2>Advanced Testing for a Safer Tomorrow</h2>
+          <p class="section-intro">Comprehensive evaluation. Accurate insights. Reliable solutions.</p>
+        </div>
+        <a class="button" href="#process">Explore Our Process <Icon name="arrow-right" size={18} /></a>
+      </div>
+      <div class="testing-grid">
+        {assessments.map((a, i) => (
+          <a class="test-card lift-card reveal" href={a.href} style={`--delay:${i * 60}ms`}>
+            <div class="card-image"><Picture src={a.image} alt={a.alt} sizes="(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 16vw" /></div>
+            <div class="test-copy">
+              <span class="test-number">{i + 1}</span>
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Process />
+
+  <!-- Projects -->
+  <section class="section light" id="projects">
+    <div class="container">
+      <SectionHeading label="Recent projects" title="Real Structures. Real Work." text="Photographs and records from our own sites." href="/projects" link="View all projects" />
+      <ProjectGrid limit={4} />
+    </div>
+  </section>
+
+  <!-- Videos -->
+  <section class="section videos-section" id="videos">
+    <div class="container">
+      <SectionHeading label="Our project videos" title="Site Execution Videos" text="Watch our story, then see the work happening on site." href="/videos" link="See more videos" />
+      <div class="home-videos">
+        <VideoCard video={brandFilm} featured={true} />
+        {homeVideos.map((v) => <VideoCard video={v} showText={false} />)}
+      </div>
+      <div class="more-videos reveal">
+        <span class="more-videos-icon"><Icon name="film" size={24} /></span>
+        <p><strong>Watch more project videos</strong>Column jacketing, NDT, core testing and inspections from our sites.</p>
+        <div class="button-row">
+          <a class="button" href="/videos">All Videos <Icon name="arrow-right" size={17} /></a>
+          <a class="button outline" href={site.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={17} /> Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <div class="highlight-strip">
+    <div class="container">
+      <p class="eyebrow">Key highlights</p>
+      <div class="highlight-grid">
+        {highlights.map((h) => (
+          <div class="highlight-item"><Icon name={h.icon} size={28} /><p><strong>{h.title}</strong>{h.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Founder + achievements -->
+  <section class="section founder-section">
+    <div class="container founder-grid">
+      <div class="founder-card reveal">
+        <p class="eyebrow">Message from founder</p>
+        <div class="founder-body">
+          <div class="founder-photo">
+            <Picture src="/images/optimized/founder.webp" alt={`${site.founder}, founder of M.M. Construction & Consults`} sizes="200px" />
+          </div>
+          <div>
+            <h2>{site.founder}</h2>
+            <blockquote>
+              <Icon name="quote" size={30} class="quote-mark" />
+              Our goal is to deliver safe, durable and sustainable structures through professional expertise, modern technology and a commitment to quality.
+            </blockquote>
+            <p class="founder-role"><strong>{site.founder}</strong>{site.founderRole}</p>
+          </div>
+        </div>
+      </div>
+      <div class="achievements reveal">
+        <p class="eyebrow">Our achievements</p>
+        <h2>Trusted by Clients. Proven by Work.</h2>
+        <div class="stats-grid">
+          {stats.map((s) => (
+            <div class="stat">
+              <Icon name={s.icon} size={30} />
+              <strong><span data-count={s.value}>{s.value}</span>{s.suffix}</strong>
+              <span>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

@@ -1,0 +1,10 @@
+---
+import { videos } from '../data/projects';
+import VideoCard from './VideoCard.astro';
+
+interface Props { limit?: number }
+const { limit = videos.length } = Astro.props;
+---
+<div class="video-grid">
+  {videos.slice(0, limit).map((v) => <VideoCard video={v} />)}
+</div>

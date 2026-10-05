@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+
+const mapQuery = encodeURIComponent('Ghatkopar West, Mumbai, Maharashtra 400086');
+---
+<Layout title="Contact & Request a Free Quote" description="Call M.M. Construction & Consults on +91 97687 37810 or +91 91525 17810, email us, or send a WhatsApp enquiry about repairs, NDT or waterproofing in Mumbai.">
+  <PageHero label="Contact us" title="Let’s talk about<br/>your building." text="Share your concern, ask about a service, or request a free quote." image="/images/optimized/completed.webp" alt="Residential building restored by M.M. Construction" />
+
+  <section class="section light">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow">Speak to our team</p>
+        <div class="contact-card lift-card">
+          <Icon name="phone" size={24} />
+          <div><h3>Call us</h3>{site.phones.map((p) => <a href={p.href}>{p.label}</a>)}</div>
+        </div>
+        <div class="contact-card lift-card">
+          <Icon name="message-circle" size={24} />
+          <div><h3>WhatsApp</h3><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">{site.phones[0].label}</a></div>
+        </div>
+        <div class="contact-card lift-card">
+          <Icon name="mail" size={24} />
+          <div><h3>Email</h3><a href={`mailto:${site.email}`}>{site.email}</a></div>
+        </div>
+        <div class="contact-card lift-card">
+          <Icon name="map-pin" size={24} />
+          <div><h3>Office</h3><p>{site.address}</p><p>Serving {site.serviceArea}</p></div>
+        </div>
+        <div class="social-links contact-social">
+          <a href={site.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={20} /></a>
+          <a href={site.facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={20} /></a>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <h2>Request a free quote</h2>
+        <p>Fill in the form and we’ll prepare your enquiry in WhatsApp. Fields marked * are required.</p>
+        <form id="enquiry-form" data-whatsapp={site.whatsapp}>
+          <div class="form-grid">
+            <div class="field"><label for="name">Your name *</label><input id="name" name="name" autocomplete="name" required minlength="2" maxlength="100" placeholder="Full name" /></div>
+            <div class="field"><label for="phone">Mobile number *</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="16" placeholder="+91 98765 43210" aria-describedby="phone-hint" /><small id="phone-hint">10-digit Indian mobile number, with optional +91.</small></div>
+            <div class="field"><label for="email">Email <span>(optional)</span></label><input id="email" name="email" type="email" autocomplete="email" maxlength="150" placeholder="you@example.com" /></div>
+            <div class="field">
+              <label for="service">Service required *</label>
+              <select id="service" name="service" required>
+                <option value="">Select a service</option>
+                {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                <option value="Help choosing the right service">Help choosing the right service</option>
+              </select>
+            </div>
+            <div class="field full"><label for="location">Project location *</label><input id="location" name="location" required minlength="2" maxlength="150" placeholder="Area / city" /></div>
+            <div class="field full"><label for="message">Tell us about the project *</label><textarea id="message" name="message" required minlength="10" maxlength="2000" placeholder="Describe the concern, type of building, or work you need."></textarea></div>
+          </div>
+          <div class="form-bottom">
+            <button class="button" type="submit" disabled>Send via WhatsApp <Icon name="send" size={18} /></button>
+            <p>Opens a prepared message — tap Send in WhatsApp to deliver it. See our <a href="/privacy-policy" class="text-link">Privacy Policy</a>.</p>
+          </div>
+          <noscript><p>JavaScript is needed to prepare the enquiry. You can <a href={`https://wa.me/${site.whatsapp}`}>contact us directly on WhatsApp</a> or call the numbers on this page.</p></noscript>
+        </form>
+        <div id="enquiry-result" class="enquiry-result" hidden tabindex="-1">
+          <h3>Your WhatsApp enquiry is ready.</h3>
+          <p>If WhatsApp did not open, use the button below. The message is delivered only after you tap Send in WhatsApp.</p>
+          <pre id="enquiry-draft"></pre>
+          <div class="button-row">
+            <a id="open-whatsapp" class="button" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">Open WhatsApp <Icon name="arrow-right" size={17} /></a>
+            <button type="button" class="button outline" data-copy-enquiry>Copy enquiry</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="map-frame">
+        <iframe title="Map of Ghatkopar West, Mumbai" src={`https://www.google.com/maps?q=${mapQuery}&output=embed`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</Layout>

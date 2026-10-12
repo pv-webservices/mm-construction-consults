@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import Picture from './Picture.astro';
+import { certificate, site } from '../data/site';
+---
+<section class="section certificate-section" id="certification">
+  <div class="container certificate-grid">
+    <a class="certificate-image lift-card reveal" href={certificate.image} target="_blank" rel="noopener" aria-label={`Open the ${certificate.standard} certificate full size`}>
+      <Picture src={certificate.image} alt={`${certificate.standard} certificate issued to ${site.name}, certificate number ${certificate.number}`} sizes="(max-width: 900px) 80vw, 360px" />
+      <span class="certificate-zoom"><Icon name="maximize-2" size={16} /> View full size</span>
+    </a>
+    <div class="certificate-copy reveal">
+      <p class="eyebrow">Certified quality</p>
+      <h2>An {certificate.standard} certified company.</h2>
+      <p>{site.name} has been assessed and found compliant with the requirements of the {certificate.standard} {certificate.title}. Our processes for auditing, testing, repair and rehabilitation follow documented quality procedures.</p>
+      <dl class="certificate-facts">
+        <div><dt>Standard</dt><dd>{certificate.standard} · {certificate.title}</dd></div>
+        <div><dt>Certificate no.</dt><dd>{certificate.number}</dd></div>
+        <div><dt>Issued</dt><dd>{certificate.issued}</dd></div>
+        <div><dt>Valid until</dt><dd>{certificate.expires}</dd></div>
+        <div class="full"><dt>Certified scope</dt><dd>{certificate.scope}</dd></div>
+      </dl>
+      <p class="certificate-issuer"><Icon name="award" size={18} /> Certified by {certificate.issuer}</p>
+    </div>
+  </div>
+</section>

@@ -127,23 +127,75 @@ modal?.addEventListener('close', () => {
   trigger?.focus();
 });
 
-/* ---------- WhatsApp enquiry form ---------- */
+/* ---------- Enquiry form: email (primary) or WhatsApp ---------- */
 const form = document.querySelector<HTMLFormElement>('#enquiry-form');
 if (form) {
   const submitButton = form.querySelector<HTMLButtonElement>('[type="submit"]');
+  const whatsappButton = form.querySelector<HTMLButtonElement>('[data-whatsapp-send]');
+  const status = form.querySelector<HTMLElement>('#enquiry-status');
   if (submitButton) submitButton.disabled = false;
+  if (whatsappButton) whatsappButton.disabled = false;
   const queryService = new URLSearchParams(location.search).get('service');
   const service = form.querySelector<HTMLSelectElement>('[name="service"]');
   if (queryService && service && Array.from(service.options).some((o) => o.value === queryService)) service.value = queryService;
   const phone = form.querySelector<HTMLInputElement>('[name="phone"]');
   phone?.addEventListener('input', () => phone.setCustomValidity(''));
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+
+  const validate = () => {
     const digits = phone?.value.replace(/\D/g, '') || '';
     phone?.setCustomValidity(/^([6-9]\d{9}|91[6-9]\d{9})$/.test(digits) ? '' : 'Enter a 10-digit Indian mobile number, with optional +91.');
-    if (!form.reportValidity()) return;
+    return form.reportValidity();
+  };
+  const field = (data: FormData, name: string) => String(data.get(name) || '').trim();
+  const showStatus = (text: string, isError = false) => {
+    if (!status) return;
+    status.hidden = false;
+    status.textContent = text;
+    status.classList.toggle('error', isError);
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!validate() || !submitButton) return;
     const data = new FormData(form);
-    const message = `Hello M.M. Construction & Consults, I would like a consultation.\n\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nEmail: ${data.get('email') || 'Not provided'}\nService: ${data.get('service')}\nProject location: ${data.get('location')}\n\n${data.get('message')}`;
+    if (field(data, '_honey')) return; // Spam bot filled the hidden field.
+    const payload = {
+      _subject: `Website enquiry: ${field(data, 'service')} — ${field(data, 'name')}`,
+      _template: 'table',
+      _captcha: 'false',
+      Name: field(data, 'name'),
+      Phone: field(data, 'phone'),
+      Email: field(data, 'email') || 'Not provided',
+      Service: field(data, 'service'),
+      'Project location': field(data, 'location'),
+      Message: field(data, 'message'),
+      ...(field(data, 'email') ? { _replyto: field(data, 'email') } : {}),
+    };
+    submitButton.disabled = true;
+    showStatus('Sending your enquiry…');
+    try {
+      const response = await fetch(form.dataset.endpoint || '', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || String(result.success) === 'false') throw new Error(result.message || `HTTP ${response.status}`);
+      form.reset();
+      form.hidden = true;
+      const sent = document.querySelector<HTMLElement>('#enquiry-sent');
+      if (sent) { sent.hidden = false; sent.focus(); }
+    } catch {
+      showStatus('Sorry, your enquiry could not be sent. Please try again, use WhatsApp, or call us directly.', true);
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+
+  whatsappButton?.addEventListener('click', () => {
+    if (!validate()) return;
+    const data = new FormData(form);
+    const message = `Hello M.M. Construction & Consults, I would like a consultation.\n\nName: ${field(data, 'name')}\nPhone: ${field(data, 'phone')}\nEmail: ${field(data, 'email') || 'Not provided'}\nService: ${field(data, 'service')}\nProject location: ${field(data, 'location')}\n\n${field(data, 'message')}`;
     const result = document.querySelector<HTMLElement>('#enquiry-result');
     const draft = document.querySelector<HTMLElement>('#enquiry-draft');
     const link = document.querySelector<HTMLAnchorElement>('#open-whatsapp');

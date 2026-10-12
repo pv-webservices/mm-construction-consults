@@ -6,7 +6,7 @@ import Picture from '../../components/Picture.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
 import CTA from '../../components/CTA.astro';
 import Icon from '../../components/Icon.astro';
-import { projects, videos } from '../../data/projects';
+import { projects, videos, projectClips } from '../../data/projects';
 import { services } from '../../data/services';
 
 export function getStaticPaths() {
@@ -14,19 +14,27 @@ export function getStaticPaths() {
 }
 const { project } = Astro.props;
 const service = services.find((s) => s.slug === project.service)!;
-const video = videos.find((v) => v.id === project.video);
+const video = [...videos, ...projectClips].find((v) => v.id === project.video);
 ---
-<Layout title={project.title} description={`${project.description} A work record from M.M. Construction & Consults, ${project.location}.`}>
+<Layout title={project.value ? `${project.title}, ${project.location}` : project.title} description={`${project.description} A work record from M.M. Construction & Consults, ${project.location}.`}>
   <PageHero label={project.title} title={project.title} text={project.description} image={project.image} alt={project.alt} parent="Projects" parentHref="/projects" />
 
   <section class="section">
     <div class="container content-grid">
       <div class="prose reveal">
         <p class="eyebrow">{project.category}</p>
-        <h2>About this work record.</h2>
+        <h2>About this project.</h2>
         <p>{project.description}</p>
+        <dl class="project-facts">
+          <div><dt><Icon name="map-pin" size={16} />Location</dt><dd>{project.location}</dd></div>
+          {project.value && <div><dt><Icon name="indian-rupee" size={16} />Project value</dt><dd>{project.value}</dd></div>}
+          <div><dt><Icon name="layers" size={16} />Type of work</dt><dd>{project.category}</dd></div>
+        </dl>
+        <h3 class="project-scope-title">Work carried out</h3>
+        <ul class="project-scope">
+          {project.scope.map((item) => <li><Icon name="circle-check" size={18} />{item}</li>)}
+        </ul>
         <p>These photographs and clips come directly from M.M. Construction &amp; Consults sites and give a first-hand view of site conditions and the work carried out.</p>
-        <p class="project-location"><Icon name="map-pin" size={16} />{project.location}</p>
         <div class="project-note">{project.note}</div>
       </div>
       <aside class="content-aside">
@@ -41,7 +49,7 @@ const video = videos.find((v) => v.id === project.video);
   <section class="section light">
     <div class="container">
       <SectionHeading label="Project photographs" title="A closer view of the work." />
-      <div class="gallery-grid">
+      <div class="gallery-grid project-gallery">
         {project.gallery.map((src, i) => (
           <figure class="lift-card reveal">
             <div class="card-image"><Picture src={src} alt={i === 0 ? project.alt : `${project.title} — site record ${i + 1}`} /></div>
@@ -56,7 +64,7 @@ const video = videos.find((v) => v.id === project.video);
     <section class="section">
       <div class="container">
         <SectionHeading label="Site footage" title={video.title} />
-        <video class="video-detail portrait" controls preload="none" playsinline poster={video.poster} aria-label={video.title}>
+        <video class:list={["video-detail", { portrait: !video.landscape }]} controls preload="none" playsinline poster={video.poster} aria-label={video.title}>
           <source src={`/videos/selected/${video.id}.mp4`} type="video/mp4" />
           Your browser does not support this video. <a href={`/videos/selected/${video.id}.mp4`}>Open the MP4.</a>
         </video>

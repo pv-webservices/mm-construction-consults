@@ -8,6 +8,8 @@ import Process from '../components/Process.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
 import VideoCard from '../components/VideoCard.astro';
 import CTA from '../components/CTA.astro';
+import BrandShowcase from '../components/BrandShowcase.astro';
+import Certificate from '../components/Certificate.astro';
 import { values, site, stats } from '../data/site';
 import { brandFilm } from '../data/projects';
 ---
@@ -27,12 +29,15 @@ import { brandFilm } from '../data/projects';
         <p>M.M. Construction &amp; Consults works across civil repair, structural rehabilitation, consulting, non-destructive testing, waterproofing and building maintenance for residential, commercial and industrial structures.</p>
         <p>Every project starts with understanding the existing structure — what you can see, and what testing can reveal. We then recommend a practical repair or strengthening scope and execute it with trained, supervised teams.</p>
         <p>From a single column repair to the complete rehabilitation of a society building, we value clear communication, careful preparation and quality that lasts.</p>
+        <p>Since 2016 we have completed structural assessments and structural audits covering more than 60000000 sq ft, and every site uses genuine branded paints, construction chemicals and cement.</p>
         <a class="button" href="/services">Explore our services <Icon name="arrow-right" size={18} /></a>
       </div>
     </div>
   </section>
 
-  <section class="section light">
+  <Certificate />
+
+  <section class="section">
     <div class="container">
       <SectionHeading label="What guides us" title="Safe. Durable. Reliable. Cost-effective." />
       <div class="values-grid">
@@ -70,5 +75,6 @@ import { brandFilm } from '../data/projects';
       <ProjectGrid filters={false} limit={4} />
     </div>
   </section>
+  <BrandShowcase light={true} />
   <CTA />
 </Layout>

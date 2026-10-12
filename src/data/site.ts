@@ -8,9 +8,17 @@ export const site = {
     { label: '+91 91525 17810', href: 'tel:+919152517810' },
     { label: '022-2512 0488', href: 'tel:+912225120488' },
   ],
-  // Address and email as published in the company's own brand film.
-  email: 'mmconstruction17@rediffmail.com',
-  address: 'Ghatkopar West, Mumbai, Maharashtra 400086',
+  // Address and emails confirmed by the client (Oct 2026). Contact-form enquiries go to `email`.
+  email: 'info@mmconstructionconsults.com',
+  emails: ['info@mmconstructionconsults.com', 'sales@mmconstructionconsults.com'],
+  address: 'A-28, Subhash Udyog Association, JMM Road, Subhash Nagar, Asalpha, Khairani Road, Ghatkopar West, Mumbai 400084',
+  addressShort: 'Ghatkopar West, Mumbai 400084',
+  streetAddress: 'A-28, Subhash Udyog Association, JMM Road, Subhash Nagar, Asalpha, Khairani Road',
+  locality: 'Ghatkopar West, Mumbai',
+  postalCode: '400084',
+  // Map embed + directions search; resolves to the company's own Google Business listing in this building.
+  mapQuery: 'M.M. Construction & Consults, Subhash Udyog Association, Ghatkopar West, Mumbai 400084',
+  foundedYear: 2016,
   serviceArea: 'Mumbai & Maharashtra',
   instagram: 'https://www.instagram.com/mmconstructionconsults',
   facebook: 'https://www.facebook.com/mmconstruction17/',
@@ -19,13 +27,34 @@ export const site = {
   url: import.meta.env.PUBLIC_SITE_URL || '',
 };
 
-// Figures taken from the client-supplied homepage design. Confirm with the client before launch.
+// Projects/clients/satisfaction come from the client-supplied homepage design; experience confirmed by the client.
 export const stats = [
   { icon: 'building-2', value: 30, suffix: '+', label: 'Projects Completed' },
   { icon: 'smile', value: 250, suffix: '+', label: 'Happy Clients' },
-  { icon: 'calendar-check', value: 8, suffix: '+', label: 'Years of Experience' },
+  { icon: 'calendar-check', value: 10, suffix: '+', label: 'Years of Experience' },
   { icon: 'users-round', value: 100, suffix: '%', label: 'Client Satisfaction' },
 ];
+
+// Headline achievement confirmed by the client. Shown in full zeros, without crore/lakh or comma formatting.
+export const auditAchievement = {
+  value: 60000000,
+  suffix: '+',
+  unit: 'sq ft',
+  period: '2016 – 2026',
+  label: 'Structural assessment & structural audit completed',
+};
+
+// ISO certificate supplied by the client.
+export const certificate = {
+  image: '/images/optimized/certificate.webp',
+  standard: 'ISO 9001:2015',
+  title: 'Quality Management System',
+  number: 'QMS/16CB/0224',
+  issued: '23 February 2024',
+  expires: '22 February 2027',
+  issuer: 'Quality Control Certification (QCC)',
+  scope: 'Structural auditing, NDT testing, industrial auditing, commercial building auditing, strengthening of structures, rehabilitation, restoration, retrofitting, building repairs, interior and architecture works.',
+};
 
 export const navigation: { name: string; href: string; children?: boolean }[] = [
   { name: 'Home', href: '/' },

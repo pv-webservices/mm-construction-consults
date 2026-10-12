@@ -8,7 +8,9 @@ import ProjectGrid from '../components/ProjectGrid.astro';
 import VideoCard from '../components/VideoCard.astro';
 import Process from '../components/Process.astro';
 import CTA from '../components/CTA.astro';
-import { site, trust, values, highlights, stats } from '../data/site';
+import BrandShowcase from '../components/BrandShowcase.astro';
+import Certificate from '../components/Certificate.astro';
+import { site, trust, values, highlights, stats, auditAchievement, certificate } from '../data/site';
 import { assessments } from '../data/services';
 import { brandFilm, videos } from '../data/projects';
 
@@ -28,7 +30,7 @@ const homeVideos = videos.slice(0, 3);
   <section class="hero">
     <div class="hero-grid">
       <div class="hero-content">
-        <p class="hero-eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Building ka Doctor · Mumbai &amp; Maharashtra</p>
+        <p class="hero-eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Building ka Doctor · {certificate.standard} Certified</p>
         <h1>Building Strength.<span>Restoring Trust.</span></h1>
         <p class="hero-lead">Expert civil repair, retrofitting and structural consulting for residential, commercial and industrial structures — from structural audit and NDT to repairs, strengthening and waterproofing.</p>
         <ul class="hero-services" aria-label="What we do">
@@ -133,10 +135,12 @@ const homeVideos = videos.slice(0, 3);
   <!-- Projects -->
   <section class="section light" id="projects">
     <div class="container">
-      <SectionHeading label="Recent projects" title="Real Structures. Real Work." text="Photographs and records from our own sites." href="/projects" link="View all projects" />
-      <ProjectGrid limit={4} />
+      <SectionHeading label="Recent projects" title="Real Structures. Real Work." text="Housing societies across Mumbai, Thane and Virar — with project values, scope and photographs from our own sites." href="/projects" link="View all projects" />
+      <ProjectGrid limit={8} />
     </div>
   </section>
+
+  <BrandShowcase />
 
   <!-- Videos -->
   <section class="section videos-section" id="videos">
@@ -191,6 +195,14 @@ const homeVideos = videos.slice(0, 3);
       <div class="achievements reveal">
         <p class="eyebrow">Our achievements</p>
         <h2>Trusted by Clients. Proven by Work.</h2>
+        <div class="audit-highlight">
+          <span class="audit-icon"><Icon name="ruler" size={28} /></span>
+          <div>
+            <p class="audit-period">{auditAchievement.period}</p>
+            <strong class="audit-value"><span data-count={auditAchievement.value}>{auditAchievement.value}</span>{auditAchievement.suffix} <small>{auditAchievement.unit}</small></strong>
+            <p>{auditAchievement.label}</p>
+          </div>
+        </div>
         <div class="stats-grid">
           {stats.map((s) => (
             <div class="stat">
@@ -203,6 +215,8 @@ const homeVideos = videos.slice(0, 3);
       </div>
     </div>
   </section>
+
+  <Certificate />
 
   <CTA />
 </Layout>

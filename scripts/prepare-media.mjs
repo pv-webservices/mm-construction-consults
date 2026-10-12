@@ -80,6 +80,40 @@ for (const { n, t, filter } of clips) {
   await write(frame(`client work video-${n}.mp4`, t, filter), `video-${n}`, { widths: [480], sharpen: 0.8 });
 }
 
+// Society project photographs, ISO certificate and project clips supplied in Oct 2026.
+const projectsIn = path.join(root, 'public/new project images & videos');
+export const projectPhotos = {
+  'park-corner': ['Park corner sagar shilp chs.jpeg'],
+  'kapil-ratna': ['Kapil Ratna Chs-1.jpeg', 'Kapil Ratna Chs-1a.jpeg'],
+  'himgiri-sai-shyam': ['Himgiri Sai Shyam CHS.jpeg'],
+  'atharva-heights': ['Atharva Heights Chs-1a.jpeg', 'Atharva Heights Chs-1b.jpeg'],
+  'hamza-tower': ['HAMZA TOWER-1a.jpeg', 'HAMZA TOWER-1b.jpeg', 'HAMZA TOWER-1c.jpeg'],
+  'prestige-park': ['Prestige Park CHS 1a.jpeg', 'Prestige Park CHS 1b.jpeg'],
+  'sukur-enclave': ['Sukur enclave 1a.jpeg', 'Sukur enclave 1b.jpeg'],
+  'sunshine': ['Sunshine chs.jpeg'],
+  'mahindra-park': ['Mahindra park chs 1a.jpeg', 'Mahindra park chs 1b.jpeg'],
+  'neelkanth-nagar': ['Neelkanth Nagar chs.jpeg'],
+  'zelam': ['Zelam Chs.jpeg'],
+  'peace-haven': ['Peace haven chs-1a.jpeg', 'Peace haven chs-1b.jpeg', 'Peace haven chs-1c.jpeg'],
+};
+for (const [slug, files] of Object.entries(projectPhotos)) {
+  for (const [i, file] of files.entries()) {
+    await write(path.join(projectsIn, file), `project-${slug}-${i + 1}`, { widths: [480, 960] });
+  }
+}
+await write(path.join(projectsIn, 'certificate.jpeg'), 'certificate', { widths: [480, 900], sharpen: 0.4, quality: 88 });
+
+export const projectVideos = [
+  { slug: 'atharva-heights', file: 'Atharva Heights Chs-1 video.mp4', t: 1.5 },
+  { slug: 'hamza-tower', file: 'HAMZA TOWER-1 video.mp4', t: 1 },
+  { slug: 'prestige-park', file: 'Prestige Park CHS video.mp4', t: 3 },
+];
+for (const { slug, file, t } of projectVideos) {
+  const still = path.join(tmp, `${slug}.png`);
+  ffmpeg(['-ss', String(t), '-i', path.join(projectsIn, file), '-frames:v', '1', still]);
+  await write(still, `project-${slug}-video`, { widths: [480], sharpen: 0.8 });
+}
+
 if (!imagesOnly) {
   await fs.rm(videoOut, { recursive: true, force: true });
   await fs.mkdir(videoOut, { recursive: true });
@@ -87,6 +121,10 @@ if (!imagesOnly) {
     const crop = n === 4 ? 'crop=464:640:8:106,' : '';
     ffmpeg(['-i', path.join(videosIn, `client work video-${n}.mp4`), '-vf', `${crop}scale=trunc(min(720\\,iw)/2)*2:-2`,
       '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-an', '-movflags', '+faststart', path.join(videoOut, `work-${n}.mp4`)]);
+  }
+  for (const { slug, file } of projectVideos) {
+    ffmpeg(['-i', path.join(projectsIn, file), '-vf', 'scale=trunc(min(720\\,iw)/2)*2:-2',
+      '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-an', '-movflags', '+faststart', path.join(videoOut, `project-${slug}.mp4`)]);
   }
   // The brand film keeps its narration.
   ffmpeg(['-i', path.join(videosIn, film), '-c:v', 'libx264', '-preset', 'medium', '-crf', '27', '-c:a', 'aac', '-b:a', '96k',

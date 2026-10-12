@@ -1,4 +1,12 @@
 {
+  "/images/optimized/certificate-480.webp": {
+    "width": 480,
+    "height": 683
+  },
+  "/images/optimized/certificate.webp": {
+    "width": 899,
+    "height": 1280
+  },
   "/images/optimized/cf-wrapping-480.webp": {
     "width": 480,
     "height": 358
@@ -78,6 +86,186 @@
   "/images/optimized/plumbing-drainage.webp": {
     "width": 960,
     "height": 717
+  },
+  "/images/optimized/project-atharva-heights-1-480.webp": {
+    "width": 480,
+    "height": 360
+  },
+  "/images/optimized/project-atharva-heights-1.webp": {
+    "width": 960,
+    "height": 720
+  },
+  "/images/optimized/project-atharva-heights-2-480.webp": {
+    "width": 480,
+    "height": 360
+  },
+  "/images/optimized/project-atharva-heights-2.webp": {
+    "width": 960,
+    "height": 720
+  },
+  "/images/optimized/project-atharva-heights-video.webp": {
+    "width": 480,
+    "height": 356
+  },
+  "/images/optimized/project-hamza-tower-1-480.webp": {
+    "width": 480,
+    "height": 640
+  },
+  "/images/optimized/project-hamza-tower-1.webp": {
+    "width": 960,
+    "height": 1280
+  },
+  "/images/optimized/project-hamza-tower-2-480.webp": {
+    "width": 480,
+    "height": 854
+  },
+  "/images/optimized/project-hamza-tower-2.webp": {
+    "width": 899,
+    "height": 1599
+  },
+  "/images/optimized/project-hamza-tower-3-480.webp": {
+    "width": 480,
+    "height": 636
+  },
+  "/images/optimized/project-hamza-tower-3.webp": {
+    "width": 866,
+    "height": 1148
+  },
+  "/images/optimized/project-hamza-tower-video.webp": {
+    "width": 368,
+    "height": 496
+  },
+  "/images/optimized/project-himgiri-sai-shyam-1-480.webp": {
+    "width": 480,
+    "height": 480
+  },
+  "/images/optimized/project-himgiri-sai-shyam-1.webp": {
+    "width": 960,
+    "height": 960
+  },
+  "/images/optimized/project-kapil-ratna-1-480.webp": {
+    "width": 480,
+    "height": 480
+  },
+  "/images/optimized/project-kapil-ratna-1.webp": {
+    "width": 960,
+    "height": 960
+  },
+  "/images/optimized/project-kapil-ratna-2-480.webp": {
+    "width": 480,
+    "height": 579
+  },
+  "/images/optimized/project-kapil-ratna-2.webp": {
+    "width": 960,
+    "height": 1158
+  },
+  "/images/optimized/project-mahindra-park-1-480.webp": {
+    "width": 480,
+    "height": 640
+  },
+  "/images/optimized/project-mahindra-park-1.webp": {
+    "width": 960,
+    "height": 1280
+  },
+  "/images/optimized/project-mahindra-park-2-480.webp": {
+    "width": 480,
+    "height": 854
+  },
+  "/images/optimized/project-mahindra-park-2.webp": {
+    "width": 720,
+    "height": 1281
+  },
+  "/images/optimized/project-neelkanth-nagar-1-480.webp": {
+    "width": 480,
+    "height": 472
+  },
+  "/images/optimized/project-neelkanth-nagar-1.webp": {
+    "width": 960,
+    "height": 945
+  },
+  "/images/optimized/project-park-corner-1-480.webp": {
+    "width": 480,
+    "height": 485
+  },
+  "/images/optimized/project-park-corner-1.webp": {
+    "width": 960,
+    "height": 969
+  },
+  "/images/optimized/project-peace-haven-1-480.webp": {
+    "width": 480,
+    "height": 408
+  },
+  "/images/optimized/project-peace-haven-1.webp": {
+    "width": 960,
+    "height": 817
+  },
+  "/images/optimized/project-peace-haven-2-480.webp": {
+    "width": 480,
+    "height": 480
+  },
+  "/images/optimized/project-peace-haven-2.webp": {
+    "width": 960,
+    "height": 961
+  },
+  "/images/optimized/project-peace-haven-3-480.webp": {
+    "width": 480,
+    "height": 610
+  },
+  "/images/optimized/project-peace-haven-3.webp": {
+    "width": 960,
+    "height": 1219
+  },
+  "/images/optimized/project-prestige-park-1-480.webp": {
+    "width": 480,
+    "height": 638
+  },
+  "/images/optimized/project-prestige-park-1.webp": {
+    "width": 960,
+    "height": 1276
+  },
+  "/images/optimized/project-prestige-park-2-480.webp": {
+    "width": 480,
+    "height": 638
+  },
+  "/images/optimized/project-prestige-park-2.webp": {
+    "width": 960,
+    "height": 1276
+  },
+  "/images/optimized/project-prestige-park-video.webp": {
+    "width": 464,
+    "height": 832
+  },
+  "/images/optimized/project-sukur-enclave-1-480.webp": {
+    "width": 480,
+    "height": 640
+  },
+  "/images/optimized/project-sukur-enclave-1.webp": {
+    "width": 960,
+    "height": 1280
+  },
+  "/images/optimized/project-sukur-enclave-2-480.webp": {
+    "width": 480,
+    "height": 640
+  },
+  "/images/optimized/project-sukur-enclave-2.webp": {
+    "width": 960,
+    "height": 1280
+  },
+  "/images/optimized/project-sunshine-1-480.webp": {
+    "width": 480,
+    "height": 854
+  },
+  "/images/optimized/project-sunshine-1.webp": {
+    "width": 899,
+    "height": 1599
+  },
+  "/images/optimized/project-zelam-1-480.webp": {
+    "width": 480,
+    "height": 1040
+  },
+  "/images/optimized/project-zelam-1.webp": {
+    "width": 591,
+    "height": 1280
   },
   "/images/optimized/rebound.webp": {
     "width": 720,

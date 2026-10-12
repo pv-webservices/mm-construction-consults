@@ -28,6 +28,7 @@ const categories = [...new Set(items.map((p) => p.category))];
           <div class="project-copy">
             <h3>{p.title}</h3>
             <p class="project-location"><Icon name="map-pin" size={15} />{p.location}</p>
+            {p.value && <p class="project-value"><Icon name="indian-rupee" size={15} />Project value <strong>{p.value.replace(/^₹/, "")}</strong></p>}
           </div>
         </a>
       </article>

@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { brandGroups } from '../data/brands';
+
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+
+// Logos keep the brands' original colours; any svg/webp/png named <slug> in public/images/brands is picked up at build time.
+const logoFiles = Object.keys(import.meta.glob('/public/images/brands/*.{svg,webp,png}')).map((f) => f.replace(/^\/public/, ''));
+const logoFor = (slug: string) => logoFiles.find((f) => f.replace(/^.*\/|\.\w+$/g, '') === slug);
+const groups = brandGroups.map((g) => ({ ...g, brands: g.brands.map((b) => ({ ...b, logo: logoFor(b.slug) })) }));
+---
+<section class:list={['section', 'brands-section', { light }]} id="brands">
+  <div class="container">
+    <SectionHeading label="Materials we trust" title="Branded products. Lasting results." text="We use genuine, branded paints, construction chemicals and cement on every site — so the repair performs as specified and the finish lasts." />
+    <div class="brand-groups">
+      {groups.map((g) => (
+        <div class="brand-group reveal">
+          <div class="brand-group-head">
+            <span class="brand-group-icon"><Icon name={g.icon} size={22} /></span>
+            <div><h3>{g.title}</h3><p>{g.text}</p></div>
+          </div>
+          <ul class="brand-grid" aria-label={g.title}>
+            {g.brands.map((b) => (
+              <li class="brand-tile" title={b.name}>
+                {b.logo
+                  ? <img src={b.logo} alt={`${b.name} logo`} loading="lazy" decoding="async" />
+                  : <span class="brand-wordmark">{b.name}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="brand-note">Brand names and logos are trademarks of their respective owners and are shown to identify the products we use.</p>
+  </div>
+</section>

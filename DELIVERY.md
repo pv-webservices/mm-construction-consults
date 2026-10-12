@@ -1,6 +1,6 @@
 # M.M. Construction & Consults
 
-Static Astro business website, with shared components and central content files. No accounts, database, dashboard, or enquiry backend.
+Static Astro business website, with shared components and central content files. No accounts, database or dashboard; contact-form enquiries are emailed through FormSubmit.
 
 ## Run locally
 
@@ -24,13 +24,14 @@ npm run preview -- --port 4330
 
 - `src/data/site.ts`: business identity, phone numbers, social URLs, confirmed WhatsApp destination, values, process, and unpublished statistics.
 - `src/data/services.ts`: all ten services and six testing methods.
-- `src/data/projects.ts`: four supplied work records and six selected videos.
+- `src/data/projects.ts`: 12 society projects (location, value, scope) plus six earlier work records, selected videos and project clips.
+- `src/data/brands.ts`: paint, construction-chemical and cement brands; logos go in `public/images/brands/<slug>.svg|webp|png`.
 - `src/data/media.json`: generated image dimensions.
 - `src/styles/global.css`: shared visual system and responsive layout.
 
-## WhatsApp enquiries
+## Enquiries
 
-The form validates required fields, Indian mobile numbers, and optional email format. Submitting prepares a URL-encoded message for the confirmed WhatsApp number and opens WhatsApp. It does not claim successful delivery: the visitor taps Send in WhatsApp. A visible enquiry preview, copy action, and fallback link remain on the contact page if the new tab does not open. No data is stored by this website.
+The form validates required fields, Indian mobile numbers, and optional email format. **Send Enquiry** posts the details to `https://formsubmit.co/ajax/info@mmconstructionconsults.com`, which emails them to the info@ inbox (the first live submission sends a one-time activation email to info@ that must be confirmed). **Send via WhatsApp** prepares the same message for the confirmed WhatsApp number instead. No data is stored by this website.
 
 ## Public launch
 

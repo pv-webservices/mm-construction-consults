@@ -9,4 +9,6 @@ for (const relative of ['images','videos']) {
     if(entry.isFile() && /\.(?:jpe?g|png|mp4)$/i.test(entry.name)) await fs.unlink(path.join(dir,entry.name));
   }
 }
+// Raw project photographs and clips supplied by the client; only their optimized copies are published.
+await fs.rm(path.join(dist,'new project images & videos'),{recursive:true,force:true});
 console.log('Release media pruned: optimized images and selected video copies only.');

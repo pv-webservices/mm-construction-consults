@@ -37,6 +37,14 @@ The homepage shows the brand film plus three clips; `/videos` shows all eight. N
 
 ## Facts and items to confirm with the client
 
-- Address (Ghatkopar West, Mumbai 400086) and email (`mmconstruction17@rediffmail.com`) are taken from the end card of the company’s own brand film.
-- Achievement figures (30+ projects, 250+ clients, 8+ years, 100% satisfaction) come from the client-supplied homepage design. They live in `stats` in `src/data/site.ts` and should be confirmed before launch.
+- Address (A-28, Subhash Udyog Association, … Ghatkopar West, Mumbai 400084), emails (info@ and sales@mmconstructionconsults.com), 10+ years of experience and the 60000000+ sq ft audit figure (2016–2026) were supplied by the client in Oct 2026. The map pin uses the company’s Google Business listing in the same building (listed there as Gala No. 05).
+- The remaining achievement figures (30+ projects, 250+ clients, 100% satisfaction) come from the client-supplied homepage design and live in `stats` in `src/data/site.ts`.
+- Contact-form enquiries are emailed to info@ through FormSubmit (formsubmit.co). The first live submission triggers a one-time activation email to info@ that must be confirmed before enquiries are delivered.
 - The brand film shows Instagram `mmconstruction17` and a YouTube channel; the site uses the Instagram URL from the original brief (`mmconstructionconsults`). The YouTube URL in the film is not a valid channel address, so it is not linked.
+
+## Society projects, certificate and brands (Oct 2026)
+
+- Originals are in `public/new project images & videos`; `scripts/prepare-media.mjs` writes `project-<name>-N.webp`, `project-<name>-video.webp` posters, `certificate.webp` and `videos/selected/project-*.mp4` (silent). The raw folder is removed from `dist` by `scripts/prune-output.mjs`.
+- Project names, locations and values were supplied by the client. Scope bullet points were written from the photographs and should be confirmed by the client.
+- The ISO 9001:2015 certificate (QMS/16CB/0224, valid to 22 Feb 2027) is shown on the homepage and About page. Update `certificate` in `src/data/site.ts` when it is renewed.
+- Brand logos live in `public/images/brands/<slug>.svg|webp|png` (slugs in `src/data/brands.ts`), shown in original colours. A brand without a file shows a text wordmark.

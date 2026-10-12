@@ -6,7 +6,7 @@ import '@fontsource/montserrat/latin-800.css';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
-import { site, navigation } from '../data/site';
+import { site, navigation, certificate } from '../data/site';
 import { services } from '../data/services';
 import Icon from '../components/Icon.astro';
 
@@ -21,7 +21,9 @@ const schema = {
   name: site.name,
   telephone: '+919768737810',
   email: site.email,
-  address: { '@type': 'PostalAddress', addressLocality: 'Ghatkopar West, Mumbai', addressRegion: 'Maharashtra', postalCode: '400086', addressCountry: 'IN' },
+  address: { '@type': 'PostalAddress', streetAddress: site.streetAddress, addressLocality: site.locality, addressRegion: 'Maharashtra', postalCode: site.postalCode, addressCountry: 'IN' },
+  foundingDate: String(site.foundedYear),
+  hasCredential: { '@type': 'EducationalOccupationalCredential', name: `${certificate.standard} ${certificate.title}`, credentialCategory: 'certification' },
   areaServed: site.serviceArea,
   sameAs: [site.instagram, site.facebook],
   founder: { '@type': 'Person', name: site.founder },
@@ -58,7 +60,7 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
         <li><a href={site.phones[0].href}><Icon name="phone" size={14} />{site.phones[0].label}</a></li>
         <li class="topbar-hide-sm"><a href={site.phones[1].href}><Icon name="phone" size={14} />{site.phones[1].label}</a></li>
         <li class="topbar-hide-md"><a href={`mailto:${site.email}`}><Icon name="mail" size={14} />{site.email}</a></li>
-        <li class="topbar-hide-lg"><Icon name="map-pin" size={14} />{site.address}</li>
+        <li class="topbar-hide-lg"><Icon name="map-pin" size={14} />{site.addressShort}</li>
       </ul>
       <div class="topbar-social">
         <span class="topbar-hide-sm">Follow us</span>
@@ -140,7 +142,7 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
         <ul>
           <li><Icon name="phone" size={18} /><span>{site.phones.map((p) => <a href={p.href}>{p.label}</a>)}</span></li>
           <li><Icon name="map-pin" size={18} /><span>{site.address}</span></li>
-          <li><Icon name="mail" size={18} /><span><a href={`mailto:${site.email}`}>{site.email}</a></span></li>
+          <li><Icon name="mail" size={18} /><span>{site.emails.map((e) => <a href={`mailto:${e}`}>{e}</a>)}</span></li>
         </ul>
       </div>
       <div>

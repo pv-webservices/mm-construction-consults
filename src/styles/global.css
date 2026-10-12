@@ -670,3 +670,81 @@ dialog#video-modal video { width: 100%; max-height: calc(100vh - 100px); backgro
   .topbar { font-size: 13px; }
   .topbar-inner { min-height: 38px; }
 }
+
+/* ---------- Brands we use ---------- */
+.brand-groups { display: grid; gap: 22px; }
+.brand-group { padding: clamp(20px, 2.6vw, 30px); border: 1px solid var(--border); border-radius: var(--radius-lg); background: #fff; box-shadow: var(--shadow-sm); }
+.brand-group-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+.brand-group-head h3 { font-size: 19px; }
+.brand-group-head p { margin-top: 4px; font-size: 14.5px; }
+.brand-group-icon { display: grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; border-radius: 12px; background: rgba(215, 20, 28, .1); color: var(--red); }
+.brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.brand-tile { display: grid; place-items: center; min-height: 92px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .3s; }
+.brand-tile:hover { transform: translateY(-4px); border-color: transparent; box-shadow: var(--shadow); }
+/* Logos are shown in their original brand colours — no greyscale or tint. */
+.brand-tile img { width: auto; max-width: 100%; height: auto; max-height: 56px; object-fit: contain; }
+.brand-wordmark { font-family: var(--heading); font-size: 16px; font-weight: 800; line-height: 1.2; color: var(--navy); text-align: center; }
+.brand-note { margin-top: 18px; font-size: 12.5px; text-align: center; }
+@media (max-width: 640px) {
+  .brand-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .brand-tile { min-height: 78px; padding: 12px; }
+  .brand-tile img { max-height: 46px; }
+}
+
+/* ---------- ISO certificate ---------- */
+.certificate-section { background: linear-gradient(180deg, #fff, var(--light)); border-top: 1px solid var(--border); }
+.certificate-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.certificate-image { display: block; overflow: hidden; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: #fff; box-shadow: var(--shadow); }
+.certificate-image img { width: 100%; height: auto; border-radius: 8px; }
+.certificate-zoom { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 0 2px; font-size: 13.5px; font-weight: 700; color: var(--navy); }
+.certificate-image:hover .certificate-zoom { color: var(--red); }
+.certificate-copy h2 { margin-bottom: 14px; }
+.certificate-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 18px; }
+.certificate-facts div { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+.certificate-facts .full { grid-column: 1 / -1; }
+.certificate-facts dt { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--red); }
+.certificate-facts dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; color: var(--navy); }
+.certificate-facts .full dd { font-weight: 500; color: var(--muted); }
+.certificate-issuer { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.certificate-issuer svg { color: var(--red); }
+@media (max-width: 900px) {
+  .certificate-grid { grid-template-columns: minmax(0, 1fr); }
+  .certificate-image { max-width: 360px; margin-inline: auto; }
+}
+@media (max-width: 640px) { .certificate-facts { grid-template-columns: 1fr; } }
+
+/* ---------- Audit achievement ---------- */
+.audit-highlight { display: flex; align-items: center; gap: 18px; margin-top: 24px; padding: 20px 22px; border-radius: 14px; background: var(--navy); color: #fff; }
+.audit-icon { display: grid; place-items: center; flex: 0 0 56px; width: 56px; height: 56px; border-radius: 14px; background: var(--red); }
+.audit-period { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #ff9da1; }
+.audit-value { display: block; margin: 2px 0; font-family: var(--heading); font-size: clamp(26px, 3vw, 40px); line-height: 1.1; color: #fff; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.audit-value small { font-size: .5em; font-weight: 700; color: #c6d3e4; white-space: nowrap; }
+.audit-highlight p:last-child { font-size: 14px; color: #c6d3e4; }
+@media (max-width: 640px) { .audit-highlight { align-items: flex-start; padding: 18px; } .audit-icon { flex-basis: 46px; width: 46px; height: 46px; } .audit-value small { display: block; margin-top: 2px; } }
+
+/* ---------- Project details ---------- */
+.project-value { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 13.5px; }
+.project-value svg { color: var(--red); }
+.project-value strong { color: var(--navy); }
+.project-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 22px 0; }
+.project-facts div { padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--light); }
+.project-facts dt { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--red); }
+.project-facts dd { margin: 4px 0 0; font-family: var(--heading); font-size: 17px; font-weight: 700; color: var(--navy); }
+.project-scope-title { margin: 8px 0 12px; font-size: 18px; }
+.project-scope { display: grid; gap: 10px; margin-bottom: 18px; }
+.project-scope li { display: flex; align-items: flex-start; gap: 10px; color: var(--ink); }
+.project-scope svg { flex: 0 0 auto; margin-top: 2px; color: var(--red); }
+.project-gallery { align-items: start; }
+.project-gallery img { aspect-ratio: auto; height: auto; }
+
+/* ---------- Contact additions ---------- */
+.hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
+.enquiry-status { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--navy); }
+.enquiry-status.error { color: var(--red-dark); }
+.enquiry-result h3 { display: flex; align-items: center; gap: 8px; }
+.enquiry-result h3 svg { color: #1a7f37; }
+.directions-link { margin-top: 8px; font-size: 14px; }
+.map-address { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 16px; }
+.map-address p { display: flex; gap: 10px; max-width: 760px; }
+.map-address p svg { flex: 0 0 auto; margin-top: 3px; color: var(--red); }
+.map-address strong { display: block; color: var(--navy); font-family: var(--heading); }

@@ -140,7 +140,7 @@ p { color: var(--muted); }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .brand img { width: 74px; height: auto; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
-.brand-text strong { font-family: var(--heading); font-size: 19px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; }
+.brand-text strong { font-family: var(--heading); font-size: 19px; font-weight: 800; color: var(--red); letter-spacing: -.02em; }
 .brand-text .brand-sub { color: var(--red); font-size: 17px; }
 .brand-text small { margin-top: 5px; font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: .02em; }
 

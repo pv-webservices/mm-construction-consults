@@ -10,7 +10,7 @@ export const site = {
   ],
   // Address and emails confirmed by the client (Oct 2026). Contact-form enquiries go to `email`.
   email: 'info@mmconstructionconsults.com',
-  emails: ['info@mmconstructionconsults.com', 'sales@mmconstructionconsults.com'],
+  emails: ['info@mmconstructionconsults.com', 'sales@mmconstructionconsults.com', 'mmconstructionconsults@gmail.com'],
   address: 'A-28, Subhash Udyog Association, JMM Road, Subhash Nagar, Asalpha, Khairani Road, Ghatkopar West, Mumbai 400084',
   addressShort: 'Ghatkopar West, Mumbai 400084',
   streetAddress: 'A-28, Subhash Udyog Association, JMM Road, Subhash Nagar, Asalpha, Khairani Road',

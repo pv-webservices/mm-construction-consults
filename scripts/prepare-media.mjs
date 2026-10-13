@@ -48,7 +48,7 @@ async function write(input, name, { widths = [480, 960], crop, upscale, sharpen 
 }
 
 // Supplied work photographs: refined and sharpened.
-await write(path.join(imagesIn, 'website-logo.jpeg'), 'logo', { widths: [240, 480], trim: true, sharpen: 0.4, quality: 90 });
+await write(path.join(imagesIn, 'website-logo-tm.jpeg'), 'logo', { widths: [240, 480], trim: true, sharpen: 0.4, quality: 90 });
 await write(path.join(imagesIn, 'client work image-4.jpeg'), 'scaffold', { widths: [600, 1170] });
 await write(path.join(imagesIn, 'client work image-3.jpeg'), 'completed', { widths: [600, 1170] });
 await write(path.join(imagesIn, 'client work image-1.jpeg'), 'inspection', { widths: [600, 1170] });

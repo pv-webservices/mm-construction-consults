@@ -8,7 +8,7 @@ The client-supplied homepage mockup (`public/images/M.M. Construction Website Ho
 
 | Source | Output | Use |
 | --- | --- | --- |
-| `website-logo.jpeg` | `logo*.webp` (trimmed) | Header and footer |
+| `website-logo-tm.jpeg` | `logo*.webp` (trimmed) | Header and footer |
 | `client work image-4.jpeg` | `scaffold*.webp` | Hero, rehabilitation project |
 | `client work image-3.jpeg` | `completed*.webp` | About, exterior project |
 | `client work image-2.jpeg` | `repair*.webp` | Structural repair service, column repair project |
@@ -37,7 +37,7 @@ The homepage shows the brand film plus three clips; `/videos` shows all eight. N
 
 ## Facts and items to confirm with the client
 
-- Address (A-28, Subhash Udyog Association, … Ghatkopar West, Mumbai 400084), emails (info@ and sales@mmconstructionconsults.com), 10+ years of experience and the 60000000+ sq ft audit figure (2016–2026) were supplied by the client in Oct 2026. The map pin uses the company’s Google Business listing in the same building (listed there as Gala No. 05).
+- Address (A-28, Subhash Udyog Association, … Ghatkopar West, Mumbai 400084), emails (info@ and sales@mmconstructionconsults.com; mmconstructionconsults@gmail.com added later), 10+ years of experience and the 60000000+ sq ft audit figure (2016–2026) were supplied by the client in Oct 2026. The map pin uses the company’s Google Business listing in the same building (listed there as Gala No. 05).
 - The remaining achievement figures (30+ projects, 250+ clients, 100% satisfaction) come from the client-supplied homepage design and live in `stats` in `src/data/site.ts`.
 - Contact-form enquiries are emailed to info@ through FormSubmit (formsubmit.co). The first live submission triggers a one-time activation email to info@ that must be confirmed before enquiries are delivered.
 - The brand film shows Instagram `mmconstruction17` and a YouTube channel; the site uses the Instagram URL from the original brief (`mmconstructionconsults`). The YouTube URL in the film is not a valid channel address, so it is not linked.

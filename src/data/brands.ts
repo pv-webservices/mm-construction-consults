@@ -6,8 +6,8 @@ export type BrandGroup = { id: string; icon: string; title: string; text: string
 
 export const brandGroups: BrandGroup[] = [
   {
-    id: 'paints', icon: 'paint-roller', title: 'Branded paints',
-    text: 'Interior and exterior paint systems from India’s leading paint companies.',
+    id: 'paints', icon: 'paint-roller', title: 'Authorized applicator of these paint brands',
+    text: 'Authorized applicator of all these brands for interior and exterior paint systems.',
     brands: [
       { slug: 'asian-paints', name: 'Asian Paints' },
       { slug: 'dulux', name: 'Dulux' },
@@ -18,8 +18,8 @@ export const brandGroups: BrandGroup[] = [
     ],
   },
   {
-    id: 'chemicals', icon: 'flask-conical', title: 'Construction chemicals',
-    text: 'Repair mortars, waterproofing, anchoring and protective systems from trusted manufacturers.',
+    id: 'chemicals', icon: 'flask-conical', title: 'Authorized applicator of these construction chemical brands',
+    text: 'Authorized applicator of all these brands for repair mortars, waterproofing, anchoring and protective systems.',
     brands: [
       { slug: 'sika', name: 'Sika' },
       { slug: 'fosroc', name: 'Fosroc' },
@@ -37,8 +37,8 @@ export const brandGroups: BrandGroup[] = [
     ],
   },
   {
-    id: 'cement', icon: 'boxes', title: 'Cement & cement-based products',
-    text: 'Quality-assured cement and cementitious products for repair and strengthening work.',
+    id: 'cement', icon: 'boxes', title: 'Our trusted brands',
+    text: 'Trusted cement and cementitious brands we rely on for repair and strengthening work.',
     brands: [
       { slug: 'acc', name: 'ACC' },
       { slug: 'ultratech', name: 'UltraTech' },

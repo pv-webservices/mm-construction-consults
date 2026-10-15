@@ -1,346 +1,446 @@
 {
-  "/images/optimized/certificate-480.webp": {
-    "width": 480,
-    "height": 683
+  "/images/brand/logo-160.webp": {
+    "width": 160,
+    "height": 101
   },
-  "/images/optimized/certificate.webp": {
-    "width": 899,
-    "height": 1280
-  },
-  "/images/optimized/cf-wrapping-480.webp": {
-    "width": 480,
-    "height": 358
-  },
-  "/images/optimized/cf-wrapping.webp": {
-    "width": 960,
-    "height": 717
-  },
-  "/images/optimized/completed-600.webp": {
-    "width": 600,
-    "height": 600
-  },
-  "/images/optimized/completed.webp": {
-    "width": 1170,
-    "height": 1170
-  },
-  "/images/optimized/core-testing-480.webp": {
-    "width": 480,
-    "height": 358
-  },
-  "/images/optimized/core-testing.webp": {
-    "width": 960,
-    "height": 717
-  },
-  "/images/optimized/external-painting-480.webp": {
-    "width": 480,
-    "height": 358
-  },
-  "/images/optimized/external-painting.webp": {
-    "width": 960,
-    "height": 717
-  },
-  "/images/optimized/film-poster.webp": {
-    "width": 848,
-    "height": 478
-  },
-  "/images/optimized/founder.webp": {
-    "width": 600,
-    "height": 805
-  },
-  "/images/optimized/inspection-600.webp": {
-    "width": 600,
-    "height": 600
-  },
-  "/images/optimized/inspection.webp": {
-    "width": 1170,
-    "height": 1170
-  },
-  "/images/optimized/logo-240.webp": {
+  "/images/brand/logo.webp": {
     "width": 240,
     "height": 151
   },
-  "/images/optimized/logo.webp": {
+  "/images/certificates/iso-9001-2015-certificate-480.webp": {
     "width": 480,
-    "height": 303
+    "height": 683
   },
-  "/images/optimized/ndt-upv-480.webp": {
-    "width": 480,
-    "height": 358
+  "/images/certificates/iso-9001-2015-certificate.webp": {
+    "width": 899,
+    "height": 1280
   },
-  "/images/optimized/ndt-upv.webp": {
-    "width": 960,
-    "height": 717
+  "/images/people/founder-300.webp": {
+    "width": 300,
+    "height": 403
   },
-  "/images/optimized/paver-work-480.webp": {
-    "width": 480,
-    "height": 358
+  "/images/people/founder.webp": {
+    "width": 600,
+    "height": 805
   },
-  "/images/optimized/paver-work.webp": {
-    "width": 960,
-    "height": 717
-  },
-  "/images/optimized/plumbing-drainage-480.webp": {
-    "width": 480,
-    "height": 358
-  },
-  "/images/optimized/plumbing-drainage.webp": {
-    "width": 960,
-    "height": 717
-  },
-  "/images/optimized/project-atharva-heights-1-480.webp": {
+  "/images/projects/atharva-heights-chs-1-480.webp": {
     "width": 480,
     "height": 360
   },
-  "/images/optimized/project-atharva-heights-1.webp": {
+  "/images/projects/atharva-heights-chs-1.webp": {
     "width": 960,
     "height": 720
   },
-  "/images/optimized/project-atharva-heights-2-480.webp": {
+  "/images/projects/atharva-heights-chs-2-480.webp": {
     "width": 480,
     "height": 360
   },
-  "/images/optimized/project-atharva-heights-2.webp": {
+  "/images/projects/atharva-heights-chs-2.webp": {
     "width": 960,
     "height": 720
   },
-  "/images/optimized/project-atharva-heights-video.webp": {
-    "width": 480,
-    "height": 356
-  },
-  "/images/optimized/project-hamza-tower-1-480.webp": {
+  "/images/projects/hamza-tower-1-480.webp": {
     "width": 480,
     "height": 640
   },
-  "/images/optimized/project-hamza-tower-1.webp": {
+  "/images/projects/hamza-tower-1.webp": {
     "width": 960,
     "height": 1280
   },
-  "/images/optimized/project-hamza-tower-2-480.webp": {
+  "/images/projects/hamza-tower-2-480.webp": {
     "width": 480,
     "height": 854
   },
-  "/images/optimized/project-hamza-tower-2.webp": {
+  "/images/projects/hamza-tower-2.webp": {
     "width": 899,
     "height": 1599
   },
-  "/images/optimized/project-hamza-tower-3-480.webp": {
+  "/images/projects/hamza-tower-3-480.webp": {
     "width": 480,
     "height": 636
   },
-  "/images/optimized/project-hamza-tower-3.webp": {
+  "/images/projects/hamza-tower-3.webp": {
     "width": 866,
     "height": 1148
   },
-  "/images/optimized/project-hamza-tower-video.webp": {
-    "width": 368,
-    "height": 496
-  },
-  "/images/optimized/project-himgiri-sai-shyam-1-480.webp": {
+  "/images/projects/himgiri-sai-shyam-chs-1-480.webp": {
     "width": 480,
     "height": 480
   },
-  "/images/optimized/project-himgiri-sai-shyam-1.webp": {
-    "width": 960,
-    "height": 960
+  "/images/projects/himgiri-sai-shyam-chs-1-800.webp": {
+    "width": 800,
+    "height": 800
   },
-  "/images/optimized/project-kapil-ratna-1-480.webp": {
+  "/images/projects/himgiri-sai-shyam-chs-1.webp": {
+    "width": 1170,
+    "height": 1170
+  },
+  "/images/projects/kapil-ratna-chs-1-480.webp": {
     "width": 480,
     "height": 480
   },
-  "/images/optimized/project-kapil-ratna-1.webp": {
-    "width": 960,
-    "height": 960
+  "/images/projects/kapil-ratna-chs-1-800.webp": {
+    "width": 800,
+    "height": 800
   },
-  "/images/optimized/project-kapil-ratna-2-480.webp": {
+  "/images/projects/kapil-ratna-chs-1.webp": {
+    "width": 1170,
+    "height": 1170
+  },
+  "/images/projects/kapil-ratna-chs-2-480.webp": {
     "width": 480,
     "height": 579
   },
-  "/images/optimized/project-kapil-ratna-2.webp": {
+  "/images/projects/kapil-ratna-chs-2.webp": {
     "width": 960,
     "height": 1158
   },
-  "/images/optimized/project-mahindra-park-1-480.webp": {
+  "/images/projects/mahindra-park-chs-1-480.webp": {
     "width": 480,
     "height": 640
   },
-  "/images/optimized/project-mahindra-park-1.webp": {
+  "/images/projects/mahindra-park-chs-1.webp": {
     "width": 960,
     "height": 1280
   },
-  "/images/optimized/project-mahindra-park-2-480.webp": {
+  "/images/projects/mahindra-park-chs-2-480.webp": {
     "width": 480,
     "height": 854
   },
-  "/images/optimized/project-mahindra-park-2.webp": {
+  "/images/projects/mahindra-park-chs-2.webp": {
     "width": 720,
     "height": 1281
   },
-  "/images/optimized/project-neelkanth-nagar-1-480.webp": {
+  "/images/projects/neelkanth-nagar-chs-1-480.webp": {
     "width": 480,
     "height": 472
   },
-  "/images/optimized/project-neelkanth-nagar-1.webp": {
+  "/images/projects/neelkanth-nagar-chs-1.webp": {
     "width": 960,
     "height": 945
   },
-  "/images/optimized/project-park-corner-1-480.webp": {
+  "/images/projects/park-corner-sagar-shilp-chs-1-480.webp": {
     "width": 480,
     "height": 485
   },
-  "/images/optimized/project-park-corner-1.webp": {
+  "/images/projects/park-corner-sagar-shilp-chs-1.webp": {
     "width": 960,
     "height": 969
   },
-  "/images/optimized/project-peace-haven-1-480.webp": {
+  "/images/projects/peace-haven-chs-1-480.webp": {
     "width": 480,
     "height": 408
   },
-  "/images/optimized/project-peace-haven-1.webp": {
+  "/images/projects/peace-haven-chs-1.webp": {
     "width": 960,
     "height": 817
   },
-  "/images/optimized/project-peace-haven-2-480.webp": {
+  "/images/projects/peace-haven-chs-2-480.webp": {
     "width": 480,
     "height": 480
   },
-  "/images/optimized/project-peace-haven-2.webp": {
+  "/images/projects/peace-haven-chs-2.webp": {
     "width": 960,
     "height": 961
   },
-  "/images/optimized/project-peace-haven-3-480.webp": {
+  "/images/projects/peace-haven-chs-3-480.webp": {
     "width": 480,
     "height": 610
   },
-  "/images/optimized/project-peace-haven-3.webp": {
+  "/images/projects/peace-haven-chs-3.webp": {
     "width": 960,
     "height": 1219
   },
-  "/images/optimized/project-prestige-park-1-480.webp": {
+  "/images/projects/prestige-park-chs-1-480.webp": {
     "width": 480,
     "height": 638
   },
-  "/images/optimized/project-prestige-park-1.webp": {
+  "/images/projects/prestige-park-chs-1.webp": {
     "width": 960,
     "height": 1276
   },
-  "/images/optimized/project-prestige-park-2-480.webp": {
+  "/images/projects/prestige-park-chs-2-480.webp": {
     "width": 480,
     "height": 638
   },
-  "/images/optimized/project-prestige-park-2.webp": {
+  "/images/projects/prestige-park-chs-2.webp": {
     "width": 960,
     "height": 1276
   },
-  "/images/optimized/project-prestige-park-video.webp": {
-    "width": 464,
-    "height": 832
+  "/images/projects/rcc-column-repair-before-after-480.webp": {
+    "width": 480,
+    "height": 480
   },
-  "/images/optimized/project-sukur-enclave-1-480.webp": {
+  "/images/projects/rcc-column-repair-before-after-800.webp": {
+    "width": 800,
+    "height": 800
+  },
+  "/images/projects/rcc-column-repair-before-after.webp": {
+    "width": 1170,
+    "height": 1170
+  },
+  "/images/projects/repair-site-condition-480.webp": {
+    "width": 480,
+    "height": 480
+  },
+  "/images/projects/repair-site-condition-800.webp": {
+    "width": 800,
+    "height": 800
+  },
+  "/images/projects/repair-site-condition.webp": {
+    "width": 1170,
+    "height": 1170
+  },
+  "/images/projects/sukur-enclave-1-480.webp": {
     "width": 480,
     "height": 640
   },
-  "/images/optimized/project-sukur-enclave-1.webp": {
+  "/images/projects/sukur-enclave-1.webp": {
     "width": 960,
     "height": 1280
   },
-  "/images/optimized/project-sukur-enclave-2-480.webp": {
+  "/images/projects/sukur-enclave-2-480.webp": {
     "width": 480,
     "height": 640
   },
-  "/images/optimized/project-sukur-enclave-2.webp": {
+  "/images/projects/sukur-enclave-2.webp": {
     "width": 960,
     "height": 1280
   },
-  "/images/optimized/project-sunshine-1-480.webp": {
+  "/images/projects/sunshine-chs-1-480.webp": {
     "width": 480,
     "height": 854
   },
-  "/images/optimized/project-sunshine-1.webp": {
+  "/images/projects/sunshine-chs-1.webp": {
     "width": 899,
     "height": 1599
   },
-  "/images/optimized/project-zelam-1-480.webp": {
+  "/images/projects/zelam-chs-1-480.webp": {
     "width": 480,
     "height": 1040
   },
-  "/images/optimized/project-zelam-1.webp": {
+  "/images/projects/zelam-chs-1.webp": {
     "width": 591,
     "height": 1280
   },
-  "/images/optimized/rebound.webp": {
-    "width": 720,
-    "height": 437
-  },
-  "/images/optimized/repair-600.webp": {
-    "width": 600,
-    "height": 600
-  },
-  "/images/optimized/repair.webp": {
-    "width": 1170,
-    "height": 1170
-  },
-  "/images/optimized/scaffold-600.webp": {
-    "width": 600,
-    "height": 600
-  },
-  "/images/optimized/scaffold.webp": {
-    "width": 1170,
-    "height": 1170
-  },
-  "/images/optimized/terrace-waterproofing-480.webp": {
+  "/images/services/cf-wrapping-480.webp": {
     "width": 480,
     "height": 358
   },
-  "/images/optimized/terrace-waterproofing.webp": {
+  "/images/services/cf-wrapping.webp": {
     "width": 960,
     "height": 717
   },
-  "/images/optimized/thermal.webp": {
+  "/images/services/core-testing-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/core-testing.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/services/external-painting-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/external-painting.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/services/ndt-upv-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/ndt-upv.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/services/paver-work-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/paver-work.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/services/plumbing-drainage-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/plumbing-drainage.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/services/rebound-hammer-test-480.webp": {
+    "width": 480,
+    "height": 291
+  },
+  "/images/services/rebound-hammer-test.webp": {
     "width": 720,
     "height": 437
   },
-  "/images/optimized/video-10.webp": {
-    "width": 476,
-    "height": 848
+  "/images/services/terrace-waterproofing-480.webp": {
+    "width": 480,
+    "height": 358
   },
-  "/images/optimized/video-11.webp": {
-    "width": 478,
-    "height": 850
+  "/images/services/terrace-waterproofing.webp": {
+    "width": 960,
+    "height": 717
   },
-  "/images/optimized/video-23.webp": {
+  "/images/services/thermal-imaging-480.webp": {
+    "width": 480,
+    "height": 291
+  },
+  "/images/services/thermal-imaging.webp": {
+    "width": 720,
+    "height": 437
+  },
+  "/images/services/waterproofing-480.webp": {
+    "width": 480,
+    "height": 358
+  },
+  "/images/services/waterproofing.webp": {
+    "width": 960,
+    "height": 717
+  },
+  "/images/video-posters/brand-film-480.webp": {
+    "width": 480,
+    "height": 271
+  },
+  "/images/video-posters/brand-film.webp": {
+    "width": 848,
+    "height": 478
+  },
+  "/images/video-posters/project-atharva-heights.webp": {
+    "width": 480,
+    "height": 356
+  },
+  "/images/video-posters/project-hamza-tower.webp": {
     "width": 368,
     "height": 496
   },
-  "/images/optimized/video-24.webp": {
-    "width": 478,
-    "height": 850
+  "/images/video-posters/project-prestige-park.webp": {
+    "width": 464,
+    "height": 832
   },
-  "/images/optimized/video-3.webp": {
-    "width": 478,
-    "height": 850
-  },
-  "/images/optimized/video-31.webp": {
+  "/images/video-posters/work-10.webp": {
     "width": 476,
     "height": 848
   },
-  "/images/optimized/video-4.webp": {
+  "/images/video-posters/work-11.webp": {
+    "width": 478,
+    "height": 850
+  },
+  "/images/video-posters/work-23.webp": {
+    "width": 368,
+    "height": 496
+  },
+  "/images/video-posters/work-24.webp": {
+    "width": 478,
+    "height": 850
+  },
+  "/images/video-posters/work-3.webp": {
+    "width": 478,
+    "height": 850
+  },
+  "/images/video-posters/work-31.webp": {
+    "width": 476,
+    "height": 848
+  },
+  "/images/video-posters/work-4.webp": {
     "width": 464,
     "height": 640
   },
-  "/images/optimized/video-6.webp": {
+  "/images/video-posters/work-6.webp": {
     "width": 478,
     "height": 850
   },
-  "/images/optimized/video-8.webp": {
+  "/images/video-posters/work-8.webp": {
     "width": 476,
     "height": 848
   },
-  "/images/optimized/waterproofing-480.webp": {
-    "width": 480,
-    "height": 358
+  "/images/material-brands/acc.svg": {
+    "width": 300,
+    "height": 103
   },
-  "/images/optimized/waterproofing.webp": {
-    "width": 960,
-    "height": 717
+  "/images/material-brands/ambuja.webp": {
+    "width": 190,
+    "height": 160
+  },
+  "/images/material-brands/asian-paints.svg": {
+    "width": 184,
+    "height": 42
+  },
+  "/images/material-brands/basf.svg": {
+    "width": 628,
+    "height": 628
+  },
+  "/images/material-brands/berger-paints.webp": {
+    "width": 220,
+    "height": 150
+  },
+  "/images/material-brands/birla-opus.svg": {
+    "width": 2804,
+    "height": 1201
+  },
+  "/images/material-brands/dr-fixit.webp": {
+    "width": 152,
+    "height": 86
+  },
+  "/images/material-brands/dulux.webp": {
+    "width": 160,
+    "height": 160
+  },
+  "/images/material-brands/fischer.svg": {
+    "width": 200,
+    "height": 32
+  },
+  "/images/material-brands/fosroc.webp": {
+    "width": 150,
+    "height": 160
+  },
+  "/images/material-brands/hilti.svg": {
+    "width": 482,
+    "height": 113
+  },
+  "/images/material-brands/jotun.svg": {
+    "width": 247,
+    "height": 97
+  },
+  "/images/material-brands/jsw-cement.svg": {
+    "width": 300,
+    "height": 142
+  },
+  "/images/material-brands/jsw-paints.svg": {
+    "width": 1202,
+    "height": 229
+  },
+  "/images/material-brands/krishna-conchem.webp": {
+    "width": 448,
+    "height": 61
+  },
+  "/images/material-brands/mcon.webp": {
+    "width": 295,
+    "height": 69
+  },
+  "/images/material-brands/myk-laticrete.svg": {
+    "width": 327,
+    "height": 48
+  },
+  "/images/material-brands/pidilite.svg": {
+    "width": 99,
+    "height": 50
+  },
+  "/images/material-brands/sika.webp": {
+    "width": 185,
+    "height": 160
+  },
+  "/images/material-brands/sunanda.webp": {
+    "width": 339,
+    "height": 74
+  },
+  "/images/material-brands/ultratech.webp": {
+    "width": 284,
+    "height": 160
   }
 }

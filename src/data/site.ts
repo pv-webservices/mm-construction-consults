@@ -24,7 +24,10 @@ export const site = {
   facebook: 'https://www.facebook.com/mmconstruction17/',
   // WhatsApp number explicitly confirmed by the client.
   whatsapp: '919768737810',
-  url: import.meta.env.PUBLIC_SITE_URL || '',
+  // Canonical origin without a trailing slash, from `site` in astro.config.mjs.
+  url: import.meta.env.SITE.replace(/\/$/, ''),
+  logo: '/images/brand/logo.webp',
+  ogImage: { src: '/images/brand/og-default.jpg', width: 1200, height: 630, alt: 'M.M. Construction & Consults logo over a building under repair with scaffolding' },
 };
 
 // Projects/clients/satisfaction come from the client-supplied homepage design; experience confirmed by the client.
@@ -46,7 +49,7 @@ export const auditAchievement = {
 
 // ISO certificate supplied by the client.
 export const certificate = {
-  image: '/images/optimized/certificate.webp',
+  image: '/images/certificates/iso-9001-2015-certificate.webp',
   standard: 'ISO 9001:2015',
   title: 'Quality Management System',
   number: 'QMS/16CB/0224',
@@ -58,12 +61,12 @@ export const certificate = {
 
 export const navigation: { name: string; href: string; children?: boolean }[] = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services', children: true },
-  { name: 'NDT Testing', href: '/ndt-services' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Videos', href: '/videos' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'About', href: '/about/' },
+  { name: 'Services', href: '/services/', children: true },
+  { name: 'NDT Testing', href: '/ndt-services/' },
+  { name: 'Projects', href: '/projects/' },
+  { name: 'Videos', href: '/videos/' },
+  { name: 'Contact', href: '/contact/' },
 ];
 
 export const trust = [

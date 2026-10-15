@@ -6,3 +6,6 @@ dist/
 !.env.example
 output/
 .playwright-cli/
+test-results/
+playwright-report/
+.netlify/

@@ -1,9 +1,9 @@
 // Generates the service photographs that the supplied media does not cover.
 // Usage: node --env-file=.env scripts/generate-images.mjs [name ...]
-// Raw model output is kept in media-src/generated; optimized WebP goes to public/images/optimized.
+// Raw model output is the master in source-files/images/generated; run `npm run media` afterwards
+// to write the published WebP/AVIF copies to public/images/services.
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import sharp from 'sharp';
 import { Buffer } from 'node:buffer';
 
 const MODEL = 'gemini-3.1-flash-lite-image';
@@ -47,10 +47,8 @@ const IMAGES = {
     'tamping blocks with a rubber mallet, neat herringbone pattern, sand bedding and kerb stones visible, apartment building behind.',
 };
 
-const outRaw = path.resolve('media-src/generated');
-const outWeb = path.resolve('public/images/optimized');
+const outRaw = path.resolve('source-files/images/generated');
 await fs.mkdir(outRaw, { recursive: true });
-await fs.mkdir(outWeb, { recursive: true });
 
 async function generate(name, prompt) {
   const body = {
@@ -68,13 +66,7 @@ async function generate(name, prompt) {
   if (!part) throw new Error(`${name}: no image returned ${JSON.stringify(json).slice(0, 400)}`);
   const buffer = Buffer.from(part.inlineData.data, 'base64');
   await fs.writeFile(path.join(outRaw, `${name}.png`), buffer);
-  const base = sharp(buffer);
-  for (const width of [480, 960]) {
-    const suffix = width === 960 ? '' : `-${width}`;
-    await base.clone().resize({ width, withoutEnlargement: true }).webp({ quality: 82 }).toFile(path.join(outWeb, `${name}${suffix}.webp`));
-  }
-  const meta = await base.metadata();
-  console.log(`${name}: ${meta.width}x${meta.height}`);
+  console.log(`${name}: ${buffer.length} bytes`);
 }
 
 const requested = process.argv.slice(2);

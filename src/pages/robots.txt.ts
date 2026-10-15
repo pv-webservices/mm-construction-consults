@@ -1,2 +1,7 @@
-import { site } from '../data/site';
-export function GET() { return new Response(site.url?`User-agent: *\nAllow: /\nSitemap: ${new URL('/sitemap.xml',site.url).href}\n`:'User-agent: *\nDisallow: /\n',{headers:{'Content-Type':'text/plain'}}); }
+import type { APIRoute } from 'astro';
+
+// Everything is crawlable (noindex pages must stay crawlable so Google can read their robots meta).
+export const GET: APIRoute = ({ site }) => new Response(
+  `User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap-index.xml', site).href}\n`,
+  { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+);

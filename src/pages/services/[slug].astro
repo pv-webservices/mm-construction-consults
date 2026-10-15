@@ -9,7 +9,9 @@ import ProjectGrid from '../../components/ProjectGrid.astro';
 import CTA from '../../components/CTA.astro';
 import Icon from '../../components/Icon.astro';
 import { services } from '../../data/services';
+import { projects } from '../../data/projects';
 import { site } from '../../data/site';
+import { describe } from '../../lib/seo';
 
 export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
@@ -24,9 +26,11 @@ const panels = [
   { title: 'Scope of work', items: service.scope, icon: 'clipboard-list' },
   { title: 'What you gain', items: service.benefits, icon: 'shield-check' },
 ];
+// Projects that used this service first, then other recent work.
+const relatedProjects = [...projects.filter((p) => p.service === service.slug), ...projects.filter((p) => p.service !== service.slug)];
 ---
-<Layout title={service.title} description={`${service.short} ${service.title} by M.M. Construction & Consults in Mumbai and Maharashtra — scope of work and our approach.`}>
-  <PageHero label={service.title} title={service.title} text={service.short} image={service.image} alt={service.alt} parent="Services" parentHref="/services" />
+<Layout title={`${service.title} in Mumbai`} description={describe(`${service.title} in Mumbai & Maharashtra by M.M. Construction & Consults.`, service.short, 'See the scope of work and our approach.')}>
+  <PageHero label={service.title} title={service.title} text={service.short} image={service.image} parent="Services" parentHref="/services/" />
 
   <section class="section">
     <div class="container content-grid">
@@ -43,7 +47,7 @@ const panels = [
       <aside class="content-aside">
         <h2>Start with a conversation.</h2>
         <p>Tell us about the building and the concern you want to address — we’ll suggest the next step.</p>
-        <a class="button" href={`/contact?service=${encodeURIComponent(service.title)}`}>Enquire about this service <Icon name="arrow-right" size={17} /></a>
+        <a class="button" href={`/contact/?service=${encodeURIComponent(service.title)}`}>Enquire about this service <Icon name="arrow-right" size={17} /></a>
         {site.phones.slice(0, 2).map((p) => <a href={p.href}><Icon name="phone" size={16} />{p.label}</a>)}
       </aside>
     </div>
@@ -65,14 +69,14 @@ const panels = [
 
   <section class="section light">
     <div class="container">
-      <SectionHeading label="Real work" title="From our project gallery." href="/projects" link="Explore our work" />
-      <ProjectGrid filters={false} limit={4} />
+      <SectionHeading label="Real work" title={`${service.title} projects and recent work.`} href="/projects/" link="Explore our work" />
+      <ProjectGrid filters={false} limit={4} items={relatedProjects} />
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <SectionHeading label="Related services" title="Explore the next part of the picture." href="/services" link="All services" />
+      <SectionHeading label="Related services" title="Explore the next part of the picture." href="/services/" link="All services" />
       <ServiceGrid detailed={true} items={related} />
     </div>
   </section>

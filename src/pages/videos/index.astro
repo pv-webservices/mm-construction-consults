@@ -10,18 +10,18 @@ import { brandFilm } from '../../data/projects';
 import { site } from '../../data/site';
 ---
 <Layout title="Project & Site Videos" description="Watch the M.M. Construction & Consults brand film and site footage of column jacketing, core cutting, rebar scanning, NDT and slab inspection.">
-  <PageHero label="Videos" title="On site.<br/>In detail." text="Our story, and real footage from the work itself — testing, investigation, jacketing and repair." image="/images/optimized/video-3.webp" alt="Column jacketing reinforcement on site" />
+  <PageHero label="Videos" title="On site.<br/>In detail." text="Our story, and real footage from the work itself — testing, investigation, jacketing and repair." image="/images/video-posters/work-3.webp" />
 
   <section class="section">
     <div class="container featured-film">
-      <VideoCard video={brandFilm} featured={true} />
+      <VideoCard video={brandFilm} featured={true} headingLevel={2} />
       <div class="prose reveal">
         <p class="eyebrow">Brand film</p>
         <h2>Why every building needs a doctor.</h2>
         <p>{brandFilm.description}</p>
         <p>Cracks, seepage and exposed reinforcement get worse — and costlier — with time. A timely structural audit and the right repair keep your home safe.</p>
         <div class="button-row">
-          <a class="button" href="/contact">Book an Inspection <Icon name="arrow-right" size={17} /></a>
+          <a class="button" href="/contact/">Book an Inspection <Icon name="arrow-right" size={17} /></a>
         </div>
       </div>
     </div>

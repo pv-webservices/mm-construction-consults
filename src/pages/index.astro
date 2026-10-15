@@ -15,16 +15,16 @@ import { assessments } from '../data/services';
 import { brandFilm, videos } from '../data/projects';
 
 const heroServices = [
-  { label: 'Structural Audit & NDT', href: '/services/ndt-structural-audit', icon: 'scan-line' },
-  { label: 'Repairs & Rehabilitation', href: '/services/structural-repairs-rehabilitation', icon: 'construction' },
-  { label: 'CF Wrapping', href: '/services/cf-wrapping-strengthening', icon: 'layers' },
-  { label: 'Waterproofing', href: '/services/waterproofing', icon: 'droplets' },
-  { label: 'External Painting', href: '/services/external-painting', icon: 'paint-roller' },
-  { label: 'Core Testing', href: '/services/concrete-core-testing', icon: 'drill' },
+  { label: 'Structural Audit & NDT', href: '/services/ndt-structural-audit/', icon: 'scan-line' },
+  { label: 'Repairs & Rehabilitation', href: '/services/structural-repairs-rehabilitation/', icon: 'construction' },
+  { label: 'CF Wrapping', href: '/services/cf-wrapping-strengthening/', icon: 'layers' },
+  { label: 'Waterproofing', href: '/services/waterproofing/', icon: 'droplets' },
+  { label: 'External Painting', href: '/services/external-painting/', icon: 'paint-roller' },
+  { label: 'Core Testing', href: '/services/concrete-core-testing/', icon: 'drill' },
 ];
 const homeVideos = videos.slice(0, 3);
 ---
-<Layout title="Structural Repair, NDT & Waterproofing in Mumbai" description="M.M. Construction & Consults: civil repair, structural rehabilitation, NDT & structural audit, CF wrapping, waterproofing and painting for buildings across Mumbai and Maharashtra.">
+<Layout title="M.M. Construction & Consults | Structural Repair & NDT, Mumbai" description="Structural audit, NDT, structural repair, CF wrapping, waterproofing and painting for housing societies and buildings in Mumbai & Maharashtra. ISO 9001:2015 certified.">
 
   <!-- Hero -->
   <section class="hero">
@@ -39,8 +39,8 @@ const homeVideos = videos.slice(0, 3);
           ))}
         </ul>
         <div class="button-row">
-          <a class="button" href="/contact">Get a Free Quote <Icon name="arrow-right" size={18} /></a>
-          <a class="button outline" href="/services">Our Services <Icon name="arrow-right" size={18} /></a>
+          <a class="button" href="/contact/">Get a Free Quote <Icon name="arrow-right" size={18} /></a>
+          <a class="button outline" href="/services/">Our Services <Icon name="arrow-right" size={18} /></a>
         </div>
         <ul class="hero-phones" aria-label="Call us">
           {site.phones.map((p) => (
@@ -49,7 +49,7 @@ const homeVideos = videos.slice(0, 3);
         </ul>
       </div>
       <div class="hero-visual">
-        <Picture src="/images/optimized/scaffold.webp" alt="M.M. Construction repair and rehabilitation work on a residential building with full scaffolding" eager={true} sizes="(max-width: 900px) 100vw, 52vw" />
+        <Picture src="/images/projects/kapil-ratna-chs-1.webp" alt="M.M. Construction repair and rehabilitation work on a residential building with full scaffolding" eager={true} sizes="(max-width: 900px) 100vw, 52vw" />
         <div class="hero-badge">
           <span class="hero-badge-icon"><Icon name="shield-check" size={24} /></span>
           <span><strong>Assess. Repair. Strengthen.</strong>Engineer-led work on real sites</span>
@@ -72,9 +72,9 @@ const homeVideos = videos.slice(0, 3);
   <section class="section about-section" id="about">
     <div class="container about-grid">
       <div class="about-image reveal">
-        <Picture src="/images/optimized/completed.webp" alt="Residential building exterior completed by M.M. Construction & Consults" sizes="(max-width: 900px) 100vw, 36vw" />
+        <Picture src="/images/projects/himgiri-sai-shyam-chs-1.webp" alt="Residential building exterior completed by M.M. Construction & Consults" sizes="(max-width: 900px) 100vw, 36vw" />
         <div class="about-inset">
-          <Picture src="/images/optimized/repair.webp" alt="Before and after RCC column repair by our team" sizes="180px" />
+          <Picture src="/images/projects/rcc-column-repair-before-after.webp" alt="Before and after RCC column repair by our team" sizes="180px" />
         </div>
         <div class="experience-badge"><strong>{stats[2].value}{stats[2].suffix}</strong><span>Years of<br />Experience</span></div>
       </div>
@@ -84,7 +84,7 @@ const homeVideos = videos.slice(0, 3);
         <p>We provide professional civil repair, retrofitting and structural consulting services with a focus on safety, quality and long-term durability.</p>
         <p>Led by {site.founder}, our team of qualified engineers and skilled applicators helps societies, owners and businesses understand the condition of their buildings — and then repair and strengthen them the right way, across {site.serviceArea}.</p>
         <div class="button-row">
-          <a class="button" href="/about">Know More About Us <Icon name="arrow-right" size={18} /></a>
+          <a class="button" href="/about/">Know More About Us <Icon name="arrow-right" size={18} /></a>
           <a class="text-link" href={`tel:+919768737810`}><Icon name="phone" size={16} /> {site.phones[0].label}</a>
         </div>
       </div>
@@ -99,7 +99,7 @@ const homeVideos = videos.slice(0, 3);
   <!-- Services -->
   <section class="section light" id="services">
     <div class="container">
-      <SectionHeading label="Our services" title="Construction, Repair, Rehabilitation & More" text="One accountable team for every stage of your building’s life — from diagnosis to durable repair." href="/services" link="View all services" />
+      <SectionHeading label="Our services" title="Construction, Repair, Rehabilitation & More" text="One accountable team for every stage of your building’s life — from diagnosis to durable repair." href="/services/" link="View all services" />
       <ServiceGrid />
     </div>
   </section>
@@ -135,7 +135,7 @@ const homeVideos = videos.slice(0, 3);
   <!-- Projects -->
   <section class="section light" id="projects">
     <div class="container">
-      <SectionHeading label="Recent projects" title="Real Structures. Real Work." text="Housing societies across Mumbai, Thane and Virar — with project values, scope and photographs from our own sites." href="/projects" link="View all projects" />
+      <SectionHeading label="Recent projects" title="Real Structures. Real Work." text="Housing societies across Mumbai, Thane and Virar — with project values, scope and photographs from our own sites." href="/projects/" link="View all projects" />
       <ProjectGrid limit={8} />
     </div>
   </section>
@@ -145,7 +145,7 @@ const homeVideos = videos.slice(0, 3);
   <!-- Videos -->
   <section class="section videos-section" id="videos">
     <div class="container">
-      <SectionHeading label="Our project videos" title="Site Execution Videos" text="Watch our story, then see the work happening on site." href="/videos" link="See more videos" />
+      <SectionHeading label="Our project videos" title="Site Execution Videos" text="Watch our story, then see the work happening on site." href="/videos/" link="See more videos" />
       <div class="home-videos">
         <VideoCard video={brandFilm} featured={true} />
         {homeVideos.map((v) => <VideoCard video={v} showText={false} />)}
@@ -154,7 +154,7 @@ const homeVideos = videos.slice(0, 3);
         <span class="more-videos-icon"><Icon name="film" size={24} /></span>
         <p><strong>Watch more project videos</strong>Column jacketing, NDT, core testing and inspections from our sites.</p>
         <div class="button-row">
-          <a class="button" href="/videos">All Videos <Icon name="arrow-right" size={17} /></a>
+          <a class="button" href="/videos/">All Videos <Icon name="arrow-right" size={17} /></a>
           <a class="button outline" href={site.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={17} /> Follow on Instagram</a>
         </div>
       </div>
@@ -180,7 +180,7 @@ const homeVideos = videos.slice(0, 3);
         <p class="eyebrow">Message from founder</p>
         <div class="founder-body">
           <div class="founder-photo">
-            <Picture src="/images/optimized/founder.webp" alt={`${site.founder}, founder of M.M. Construction & Consults`} sizes="200px" />
+            <Picture src="/images/people/founder.webp" alt={`${site.founder}, founder of M.M. Construction & Consults`} sizes="200px" />
           </div>
           <div>
             <h2>{site.founder}</h2>

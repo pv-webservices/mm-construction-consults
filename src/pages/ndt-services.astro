@@ -9,9 +9,10 @@ import Process from '../components/Process.astro';
 import CTA from '../components/CTA.astro';
 import { tests } from '../data/services';
 import { videos } from '../data/projects';
+import { faqSchema, jsonLd } from '../lib/seo';
 
 const ndtVideos = videos.filter((v) => v.category === 'NDT' || v.category === 'Testing').slice(0, 4);
-const faqs = [
+const faqs: [string, string][] = [
   ['Does one NDT test confirm structural safety?', 'No. Different tests provide different evidence. Readings are interpreted together with site observations, building information and an engineering assessment.'],
   ['Is concrete core testing non-destructive?', 'No. A core is physically removed from the concrete, so sampling locations, reinforcement and reinstatement are planned as part of the investigation.'],
   ['Can you recommend a test before visiting the site?', 'We can discuss your concerns first, but suitable methods and locations depend on the structure, access and the question the investigation needs to answer.'],
@@ -19,7 +20,7 @@ const faqs = [
 ];
 ---
 <Layout title="NDT & Structural Testing" description="UPV, rebound hammer, core testing, thermal imaging, rebar detection and visual inspection by M.M. Construction & Consults for structural audits in Mumbai.">
-  <PageHero label="NDT & structural testing" title="Look deeper.<br/>Make informed decisions." text="Non-destructive testing, sampling and documentation that show what the surface can’t tell you." image="/images/optimized/ndt-upv.webp" alt="Engineer performing ultrasonic pulse velocity testing on a concrete column" />
+  <PageHero label="NDT & structural testing" title="Look deeper.<br/>Make informed decisions." text="Non-destructive testing, sampling and documentation that show what the surface can’t tell you." image="/images/services/ndt-upv.webp" />
 
   <section class="section">
     <div class="container content-grid">
@@ -33,7 +34,7 @@ const faqs = [
       <aside class="content-aside">
         <h2>Which tests does your building need?</h2>
         <p>Share your concern with our team and we’ll discuss the right assessment approach.</p>
-        <a class="button" href="/contact?service=NDT%20%26%20Structural%20Audit">Discuss an assessment <Icon name="arrow-right" size={17} /></a>
+        <a class="button" href="/contact/?service=NDT%20%26%20Structural%20Audit">Discuss an assessment <Icon name="arrow-right" size={17} /></a>
       </aside>
     </div>
   </section>
@@ -61,7 +62,7 @@ const faqs = [
 
   <section class="section light">
     <div class="container">
-      <SectionHeading label="On-site investigation" title="Testing in the field." href="/videos" link="All videos" />
+      <SectionHeading label="On-site investigation" title="Testing in the field." href="/videos/" link="All videos" />
       <div class="video-grid">{ndtVideos.map((v) => <VideoCard video={v} />)}</div>
     </div>
   </section>
@@ -69,6 +70,7 @@ const faqs = [
   <section class="section">
     <div class="container">
       <SectionHeading label="Common questions" title="A clearer understanding of testing." />
+      <script type="application/ld+json" set:html={jsonLd(faqSchema(faqs))} />
       <div class="faq">
         {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
       </div>

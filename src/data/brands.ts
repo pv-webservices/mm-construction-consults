@@ -1,5 +1,5 @@
 // Brands whose materials the company uses, as listed by the client.
-// Logos are the brands' own artwork in original colours, stored in public/images/brands/<slug>.<ext>.
+// Logos are the brands' own artwork in original colours, stored in public/images/material-brands/<slug>.<ext>.
 // A brand without a logo file falls back to a text wordmark (see BrandShowcase.astro).
 export type Brand = { slug: string; name: string };
 export type BrandGroup = { id: string; icon: string; title: string; text: string; brands: Brand[] };

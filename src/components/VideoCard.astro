@@ -3,12 +3,13 @@ import type { Video } from '../data/projects';
 import Icon from './Icon.astro';
 import Picture from './Picture.astro';
 
-interface Props { video: Video; featured?: boolean; showText?: boolean }
-const { video, featured = false, showText = true } = Astro.props;
+interface Props { video: Video; featured?: boolean; showText?: boolean; headingLevel?: 2 | 3 }
+const { video, featured = false, showText = true, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
 ---
 <a
   class:list={['video-card', 'lift-card', 'reveal', { featured, landscape: video.landscape }]}
-  href={`/videos/${video.id}`}
+  href={`/videos/${video.id}/`}
   data-video={`/videos/selected/${video.id}.mp4`}
   data-title={video.title}
   data-landscape={video.landscape ? 'true' : undefined}
@@ -20,7 +21,7 @@ const { video, featured = false, showText = true } = Astro.props;
     <span class="video-duration">{video.duration}</span>
   </div>
   <div class="video-copy">
-    <h3>{video.title}</h3>
+    <Heading>{video.title}</Heading>
     {showText && <p>{video.description}</p>}
     <span class="video-cta">Watch video <Icon name="arrow-right" size={15} /></span>
   </div>

@@ -261,7 +261,7 @@ p { color: var(--muted); }
 .service-card.is-touched .service-index { background: var(--navy); }
 .service-card.is-touched h3 { color: var(--red); }
 .service-grid.detailed { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
-.service-footnote { margin-top: 22px; font-size: 13px; color: #7a8595; }
+.service-footnote { margin-top: 22px; font-size: 13px; color: var(--muted); }
 
 /* ---------- Advanced testing (dark) ---------- */
 .ndt-section { position: relative; background: var(--navy); color: #fff; overflow: hidden; }
@@ -629,7 +629,7 @@ dialog#video-modal video { width: 100%; max-height: calc(100vh - 100px); backgro
   .founder-body { grid-template-columns: minmax(0, 1fr); }
   .founder-photo { max-width: 200px; }
   .form-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
   .footer-contact { grid-column: 1 / -1; }
   .values-grid { grid-template-columns: 1fr; }
   .whatsapp-float { width: 54px; height: 54px; right: 16px; bottom: 16px; }
@@ -748,3 +748,35 @@ dialog#video-modal video { width: 100%; max-height: calc(100vh - 100px); backgro
 .map-address p { display: flex; gap: 10px; max-width: 760px; }
 .map-address p svg { flex: 0 0 auto; margin-top: 3px; color: var(--red); }
 .map-address strong { display: block; color: var(--navy); font-family: var(--heading); }
+
+/* ---------- Enquiry form states ---------- */
+.hp-field label { position: absolute; }
+.field-error { margin: 0; font-size: 13.5px; font-weight: 600; color: var(--red-dark); }
+.field [aria-invalid="true"] { border-color: var(--red-dark); background: #fff7f7; }
+.form-summary { margin-bottom: 20px; padding: 16px 18px; border: 2px solid var(--red-dark); border-radius: var(--radius); background: #fff7f7; color: var(--ink); }
+.form-summary p { font-weight: 700; }
+.form-summary ul { margin: 8px 0 0; padding-left: 20px; }
+.form-summary a { color: var(--red-dark); text-decoration: underline; }
+.consent-row { display: flex; align-items: flex-start; gap: 12px; }
+.consent-row input { flex: none; width: 24px; height: 24px; min-height: 0; margin-top: 2px; accent-color: var(--navy); }
+.consent-row label { font-weight: 400; font-size: 14px; line-height: 1.55; }
+.enquiry-status.error { padding: 14px 16px; border-left: 4px solid var(--red-dark); border-radius: 6px; background: #fff7f7; }
+
+/* ---------- Utility pages (404, thank you) ---------- */
+.utility-page h1 { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: clamp(30px, 4vw, 46px); }
+.utility-page h2 { margin-top: 32px; font-size: 22px; }
+.utility-icon { color: #1a7f37; flex: none; }
+.utility-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); gap: 10px; margin: 18px 0 8px; padding: 0; list-style: none; }
+.utility-links a { display: flex; align-items: center; gap: 10px; min-height: 48px; overflow-wrap: anywhere; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; font-weight: 600; color: var(--navy); }
+.utility-links a:hover, .utility-links a:focus-visible { border-color: var(--red); color: var(--red-dark); }
+.utility-links svg { flex: none; color: var(--red); }
+
+/* ---------- Tap targets: at least 24×24px (WCAG 2.2 target size) ---------- */
+.footer ul a, .footer-bottom a, .footer-contact a, .breadcrumbs a, .topbar-contact a, .sitemap-list a { display: inline-flex; align-items: center; min-height: 24px; }
+@media (max-width: 400px) {
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Rendering performance ---------- */
+/* Below-the-fold blocks are laid out only when they approach the viewport (big win on the long home page). */
+main > .section:not(:first-child), main > .trust-strip, main > .highlight-strip, main > .cta-section, .footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }

@@ -6,6 +6,7 @@ import VideoCard from '../../components/VideoCard.astro';
 import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
 import { allVideos } from '../../data/projects';
+import { describe } from '../../lib/seo';
 
 export function getStaticPaths() {
   return allVideos.map((video) => ({ params: { slug: video.id }, props: { video } }));
@@ -13,8 +14,8 @@ export function getStaticPaths() {
 const { video } = Astro.props;
 const more = allVideos.filter((v) => v.id !== video.id && !v.landscape).slice(0, 4);
 ---
-<Layout title={video.title} description={`${video.description} Watch this video from M.M. Construction & Consults.`}>
-  <PageHero label={video.title} title={video.title} text={video.description} image={video.poster} alt={`Still frame from ${video.title}`} parent="Videos" parentHref="/videos" />
+<Layout title={`${video.title} – Video`} description={describe(video.description, 'Watch this site video from M.M. Construction & Consults, Mumbai.')}>
+  <PageHero label={video.title} title={video.title} text={video.description} image={video.poster}`} parent="Videos" parentHref="/videos/" />
 
   <section class="section">
     <div class="container">
@@ -24,8 +25,8 @@ const more = allVideos.filter((v) => v.id !== video.id && !v.landscape).slice(0,
       </video>
       <p class="video-note">{video.landscape ? 'Animated brand film with narration.' : 'Silent site footage recorded on an M.M. Construction site.'}</p>
       <div class="button-row">
-        <a class="button outline" href="/videos">All videos</a>
-        <a class="button" href="/contact">Discuss your building <Icon name="arrow-right" size={17} /></a>
+        <a class="button outline" href="/videos/">All videos</a>
+        <a class="button" href="/contact/">Discuss your building <Icon name="arrow-right" size={17} /></a>
       </div>
     </div>
   </section>

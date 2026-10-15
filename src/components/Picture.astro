@@ -6,23 +6,27 @@ const { src, alt, class: className, eager = false, sizes = '(max-width: 640px) 1
 
 type Size = { width: number; height: number };
 const media = manifest as Record<string, Size>;
-const dimensions = media[src] || { width: 960, height: 720 };
-// Smaller variants are written as name-<width>.webp next to the largest file.
+const dimensions = media[src];
+if (!dimensions) throw new Error(`Picture: ${src} is not in src/data/media.json (run npm run media).`);
+// Smaller variants are written as name-<width>.webp next to the largest file, each with an .avif twin.
 const base = src.replace(/\.webp$/, '');
-const variants = Object.keys(media).filter((key) => key === src || new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-\\d+\\.webp$`).test(key));
-const srcset = variants.length > 1
-  ? variants.sort((a, b) => media[a].width - media[b].width).map((key) => `${key} ${media[key].width}w`).join(', ')
-  : undefined;
+const variants = Object.keys(media)
+  .filter((key) => key === src || new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-\\d+\\.webp$`).test(key))
+  .sort((a, b) => media[a].width - media[b].width);
+const srcset = (ext: string) => variants.map((key) => `${key.replace(/\.webp$/, ext)} ${media[key].width}w`).join(', ');
 ---
-<img
-  src={src}
-  srcset={srcset}
-  sizes={srcset ? sizes : undefined}
-  alt={alt}
-  class={className}
-  loading={eager ? 'eager' : 'lazy'}
-  fetchpriority={eager ? 'high' : 'auto'}
-  decoding="async"
-  width={dimensions.width}
-  height={dimensions.height}
-/>
+<picture>
+  <source type="image/avif" srcset={srcset('.avif')} sizes={sizes} />
+  <img
+    src={src}
+    srcset={srcset('.webp')}
+    sizes={sizes}
+    alt={alt}
+    class={className}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+    decoding={eager ? undefined : 'async'}
+    width={dimensions.width}
+    height={dimensions.height}
+  />
+</picture>

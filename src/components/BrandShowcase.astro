@@ -1,15 +1,24 @@
 ---
 import Icon from './Icon.astro';
 import SectionHeading from './SectionHeading.astro';
+import sharp from 'sharp';
 import { brandGroups } from '../data/brands';
 
 interface Props { light?: boolean }
 const { light = false } = Astro.props;
 
-// Logos keep the brands' original colours; any svg/webp/png named <slug> in public/images/brands is picked up at build time.
-const logoFiles = Object.keys(import.meta.glob('/public/images/brands/*.{svg,webp,png}')).map((f) => f.replace(/^\/public/, ''));
+// Logos keep the brands' original colours; any svg/webp/png named <slug> in public/images/material-brands is picked up at build time.
+const logoFiles = Object.keys(import.meta.glob('/public/images/material-brands/*.{svg,webp,png}')).map((f) => f.replace(/^\/public/, ''));
 const logoFor = (slug: string) => logoFiles.find((f) => f.replace(/^.*\/|\.\w+$/g, '') === slug);
-const groups = brandGroups.map((g) => ({ ...g, brands: g.brands.map((b) => ({ ...b, logo: logoFor(b.slug) })) }));
+const size = async (file?: string) => {
+  if (!file) return undefined;
+  const { width = 160, height = 60 } = await sharp(`public${file}`).metadata();
+  return { width, height };
+};
+const groups = await Promise.all(brandGroups.map(async (g) => ({
+  ...g,
+  brands: await Promise.all(g.brands.map(async (b) => { const logo = logoFor(b.slug); return { ...b, logo, size: await size(logo) }; })),
+})));
 ---
 <section class:list={['section', 'brands-section', { light }]} id="brands">
   <div class="container">
@@ -25,7 +34,7 @@ const groups = brandGroups.map((g) => ({ ...g, brands: g.brands.map((b) => ({ ..
             {g.brands.map((b) => (
               <li class="brand-tile" title={b.name}>
                 {b.logo
-                  ? <img src={b.logo} alt={`${b.name} logo`} loading="lazy" decoding="async" />
+                  ? <img src={b.logo} alt={`${b.name} logo`} width={b.size?.width} height={b.size?.height} loading="lazy" decoding="async" />
                   : <span class="brand-wordmark">{b.name}</span>}
               </li>
             ))}

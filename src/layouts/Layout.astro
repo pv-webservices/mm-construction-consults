@@ -6,50 +6,90 @@ import '@fontsource/montserrat/latin-800.css';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
+// Same hashed files the @fontsource CSS references: body text and the H1 weight are preloaded.
+import interRegular from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import montserratHeavy from '@fontsource/montserrat/files/montserrat-latin-800-normal.woff2?url';
 import { site, navigation, certificate } from '../data/site';
 import { services } from '../data/services';
+import { pageTitle, jsonLd, absolute, ids } from '../lib/seo';
 import Icon from '../components/Icon.astro';
 
-interface Props { title: string; description: string; noindex?: boolean }
-const { title, description, noindex = false } = Astro.props;
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+interface Props {
+  title: string;
+  description: string;
+  /** Utility pages (404, thank-you, HTML sitemap): noindex, no canonical, not in the XML sitemap. */
+  noindex?: boolean;
+  /** Social-sharing image; defaults to the 1200×630 brand image. */
+  image?: { src: string; width: number; height: number; alt: string };
+  ogType?: 'website' | 'article';
+}
+const { title, description, noindex = false, image = site.ogImage, ogType = 'website' } = Astro.props;
+// Netlify sets CONTEXT at build time; deploy previews and branch deploys must never be indexed.
+const isPreviewBuild = ['deploy-preview', 'branch-deploy'].includes(process.env.CONTEXT ?? '');
+const indexable = !noindex && !isPreviewBuild;
+const fullTitle = pageTitle(title);
+const pathname = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
-const canonical = site.url ? new URL(Astro.url.pathname, site.url).href : undefined;
-const schema = {
+const canonical = absolute(pathname);
+const graph = {
   '@context': 'https://schema.org',
-  '@type': 'GeneralContractor',
-  name: site.name,
-  telephone: '+919768737810',
-  email: site.email,
-  address: { '@type': 'PostalAddress', streetAddress: site.streetAddress, addressLocality: site.locality, addressRegion: 'Maharashtra', postalCode: site.postalCode, addressCountry: 'IN' },
-  foundingDate: String(site.foundedYear),
-  hasCredential: { '@type': 'EducationalOccupationalCredential', name: `${certificate.standard} ${certificate.title}`, credentialCategory: 'certification' },
-  areaServed: site.serviceArea,
-  sameAs: [site.instagram, site.facebook],
-  founder: { '@type': 'Person', name: site.founder },
-  ...(site.url ? { url: site.url, image: new URL('/images/optimized/scaffold.webp', site.url).href } : {}),
+  '@graph': [
+    {
+      '@type': 'GeneralContractor',
+      '@id': ids.organization,
+      name: site.name,
+      url: `${site.url}/`,
+      logo: { '@type': 'ImageObject', url: absolute(site.logo), width: 240, height: 151 },
+      image: absolute(site.ogImage.src),
+      telephone: '+919768737810',
+      email: site.email,
+      address: { '@type': 'PostalAddress', streetAddress: site.streetAddress, addressLocality: site.locality, addressRegion: 'Maharashtra', postalCode: site.postalCode, addressCountry: 'IN' },
+      foundingDate: String(site.foundedYear),
+      hasCredential: { '@type': 'EducationalOccupationalCredential', name: `${certificate.standard} ${certificate.title}`, credentialCategory: 'certification' },
+      areaServed: site.serviceArea,
+      sameAs: [site.instagram, site.facebook],
+      founder: { '@id': ids.founder },
+    },
+    { '@type': 'WebSite', '@id': ids.website, url: `${site.url}/`, name: site.name, inLanguage: 'en-IN', publisher: { '@id': ids.organization } },
+    { '@type': 'Person', '@id': ids.founder, name: site.founder, jobTitle: 'Founder, Structural Consultant & Contractor', worksFor: { '@id': ids.organization } },
+  ],
 };
-const quickLinks = navigation.filter((n) => n.href !== '/contact');
+const quickLinks = navigation.filter((n) => n.href !== '/contact/');
 ---
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title} | M.M. Construction & Consults</title>
+  <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  <meta name="robots" content={indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'} />
+  {indexable && <link rel="canonical" href={canonical} />}
+  <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={montserratHeavy} as="font" type="font/woff2" crossorigin />
   <meta name="theme-color" content="#0b2545" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  {canonical && <link rel="canonical" href={canonical} />}
-  <meta name="robots" content={noindex || !site.url ? 'noindex, follow' : 'index, follow'} />
-  <meta property="og:title" content={`${title} | ${site.name}`} />
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  {canonical && <>
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/images/optimized/scaffold.webp', site.url).href} />
-  </>}
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={absolute(image.src)} />
+  <meta property="og:image:width" content={String(image.width)} />
+  <meta property="og:image:height" content={String(image.height)} />
+  <meta property="og:image:alt" content={image.alt} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={absolute(image.src)} />
+  <meta name="twitter:image:alt" content={image.alt} />
+  <script type="application/ld+json" set:html={jsonLd(graph)} />
+  <slot name="head" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -74,7 +114,7 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
   <header class="header">
     <div class="container header-inner">
       <a href="/" class="brand" aria-label="M.M. Construction & Consults — home">
-        <img src="/images/optimized/logo-240.webp" srcset="/images/optimized/logo-240.webp 1x, /images/optimized/logo.webp 2x" alt="" width="240" height="151" />
+        <img src="/images/brand/logo-160.webp" srcset="/images/brand/logo-160.webp 1x, /images/brand/logo.webp 2x" alt="" width="160" height="101" />
         <span class="brand-text">
           <strong>M.M. Construction</strong>
           <strong class="brand-sub">&amp; Consults</strong>
@@ -98,17 +138,17 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
                   <div class="submenu">
                     <ul>
                       {services.map((s) => (
-                        <li><a href={`/services/${s.slug}`}><Icon name={s.icon} size={18} />{s.title}</a></li>
+                        <li><a href={`/services/${s.slug}/`}><Icon name={s.icon} size={18} />{s.title}</a></li>
                       ))}
                     </ul>
-                    <a class="submenu-all" href="/services">View all services <Icon name="arrow-right" size={15} /></a>
+                    <a class="submenu-all" href="/services/">View all services <Icon name="arrow-right" size={15} /></a>
                   </div>
                 </>
               )}
             </li>
           ))}
         </ul>
-        <a href="/contact" class="button nav-quote">Get a Free Quote <Icon name="arrow-right" size={16} /></a>
+        <a href="/contact/" class="button nav-quote">Get a Free Quote <Icon name="arrow-right" size={16} /></a>
         <a class="mobile-phone" href={site.phones[0].href}><Icon name="phone" size={17} /> Call {site.phones[0].label}</a>
       </nav>
     </div>
@@ -120,7 +160,7 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
     <div class="container footer-grid">
       <div class="footer-brand">
         <a href="/" class="brand">
-          <img src="/images/optimized/logo-240.webp" alt="M.M. Construction & Consults logo" width="240" height="151" loading="lazy" />
+          <img src="/images/brand/logo-160.webp" srcset="/images/brand/logo-160.webp 1x, /images/brand/logo.webp 2x" alt="" width="160" height="101" loading="lazy" />
           <span class="brand-text">
             <strong>M.M. Construction</strong>
             <strong class="brand-sub">&amp; Consults</strong>
@@ -135,7 +175,7 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
       </div>
       <div>
         <h2>Our Services</h2>
-        <ul>{services.map((s) => <li><a href={`/services/${s.slug}`}>{s.title}</a></li>)}</ul>
+        <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
       </div>
       <div class="footer-contact">
         <h2>Contact Us</h2>
@@ -152,16 +192,16 @@ const quickLinks = navigation.filter((n) => n.href !== '/contact');
           <a href={site.facebook} aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={20} /></a>
           <a href={`https://wa.me/${site.whatsapp}`} aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer"><Icon name="message-circle" size={20} /></a>
         </div>
-        <a class="button small footer-quote" href="/contact">Get a Free Quote <Icon name="arrow-right" size={15} /></a>
+        <a class="button small footer-quote" href="/contact/">Get a Free Quote <Icon name="arrow-right" size={15} /></a>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
         <p>© {new Date().getFullYear()} M.M. Construction &amp; Consults. All rights reserved.</p>
         <div>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-conditions">Terms &amp; Conditions</a>
-          <a href="/sitemap">Sitemap</a>
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="/terms-conditions/">Terms &amp; Conditions</a>
+          <a href="/sitemap/">Sitemap</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,39 @@
 ---
+// Netlify serves dist/404.html with a real 404 status for any unknown URL. noindex, no canonical.
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+
+const sections = [
+  { name: 'Our services', href: '/services/', icon: 'construction' },
+  { name: 'NDT & structural testing', href: '/ndt-services/', icon: 'scan-line' },
+  { name: 'Projects', href: '/projects/', icon: 'building-2' },
+  { name: 'Videos', href: '/videos/', icon: 'film' },
+  { name: 'About us', href: '/about/', icon: 'users-round' },
+  { name: 'Contact & free quote', href: '/contact/', icon: 'mail' },
+];
 ---
-<Layout title="Page Not Found" description="The requested page could not be found. Explore M.M. Construction & Consults services or contact our team." noindex={true}><section class="section"><div class="container prose"><p class="eyebrow">404 / page not found</p><h1>This page isn’t here.</h1><p style="margin-top:20px">Let’s help you find what you need.</p><div class="button-row"><a href="/" class="button">Back to Home →</a><a href="/services" class="button outline">Explore Our Services</a></div></div></section></Layout>
+<Layout title="Page Not Found (404)" description="The page you were looking for could not be found. Find M.M. Construction & Consults services, projects and contact details here." noindex={true}>
+  <section class="section utility-page">
+    <div class="container prose">
+      <p class="eyebrow">Error 404 · page not found</p>
+      <h1>Sorry, this page isn’t here.</h1>
+      <p>The link may be old, or the address may have a typing mistake. These pages should help you find what you need:</p>
+      <ul class="utility-links">
+        <li><a href="/"><Icon name="house" size={18} />Home</a></li>
+        {sections.map((s) => <li><a href={s.href}><Icon name={s.icon} size={18} />{s.name}</a></li>)}
+      </ul>
+      <h2>Popular services</h2>
+      <ul class="utility-links">
+        {services.slice(0, 4).map((s) => <li><a href={`/services/${s.slug}/`}><Icon name={s.icon} size={18} />{s.title}</a></li>)}
+      </ul>
+      <h2>Talk to us</h2>
+      <p>Call <a class="text-link" href={site.phones[0].href}>{site.phones[0].label}</a>, message us on <a class="text-link" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>, or email <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <div class="button-row">
+        <a href="/" class="button">Back to Home <Icon name="arrow-right" size={17} /></a>
+        <a href="/contact/" class="button outline">Contact us</a>
+      </div>
+    </div>
+  </section>
+</Layout>

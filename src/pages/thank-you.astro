@@ -1,0 +1,27 @@
+---
+// Confirmation page after the enquiry form. noindex and excluded from the XML sitemap (src/data/seo.mjs).
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Layout title="Thank You – Enquiry Received" description="Thank you for contacting M.M. Construction & Consults. Your enquiry has reached our team; call or WhatsApp us if your matter is urgent." noindex={true}>
+  <section class="section utility-page">
+    <div class="container prose">
+      <p class="eyebrow">Enquiry sent</p>
+      <h1><Icon name="circle-check" size={40} class="utility-icon" /> Thank you, your enquiry has been sent.</h1>
+      <p>Your message has been emailed to our team, who will review it and get back to you using the details you provided.</p>
+      <p>If the matter is urgent, please call or message us directly:</p>
+      <ul class="utility-links">
+        <li><a href={site.phones[0].href}><Icon name="phone" size={18} />Call {site.phones[0].label}</a></li>
+        <li><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer"><Icon name="message-circle" size={18} />WhatsApp {site.phones[0].label}</a></li>
+        <li><a href={`mailto:${site.email}`}><Icon name="mail" size={18} />{site.email}</a></li>
+      </ul>
+      <h2>While you wait</h2>
+      <div class="button-row">
+        <a href="/" class="button">Back to Home <Icon name="arrow-right" size={17} /></a>
+        <a href="/projects/" class="button outline">See our projects</a>
+        <a href="/services/" class="button outline">Explore our services</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,11 +1,11 @@
 ---
-import { projects } from '../data/projects';
+import { projects, type Project } from '../data/projects';
 import Icon from './Icon.astro';
 import Picture from './Picture.astro';
 
-interface Props { filters?: boolean; limit?: number }
-const { filters = true, limit = projects.length } = Astro.props;
-const items = projects.slice(0, limit);
+interface Props { filters?: boolean; limit?: number; items?: Project[] }
+const { filters = true, limit = projects.length, items: source = projects } = Astro.props;
+const items = source.slice(0, limit);
 const categories = [...new Set(items.map((p) => p.category))];
 ---
 <div data-project-gallery>
@@ -19,7 +19,7 @@ const categories = [...new Set(items.map((p) => p.category))];
   <div class="project-grid">
     {items.map((p, i) => (
       <article class="project-card lift-card reveal" data-category={p.category} style={`--delay:${(i % 4) * 70}ms`}>
-        <a href={`/projects/${p.slug}`}>
+        <a href={`/projects/${p.slug}/`}>
           <div class="card-image">
             <Picture src={p.image} alt={p.alt} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 25vw" />
             <span class="project-tag">{p.category}</span>

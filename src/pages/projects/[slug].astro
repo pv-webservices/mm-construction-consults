@@ -8,6 +8,7 @@ import CTA from '../../components/CTA.astro';
 import Icon from '../../components/Icon.astro';
 import { projects, videos, projectClips } from '../../data/projects';
 import { services } from '../../data/services';
+import { describe } from '../../lib/seo';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -16,8 +17,8 @@ const { project } = Astro.props;
 const service = services.find((s) => s.slug === project.service)!;
 const video = [...videos, ...projectClips].find((v) => v.id === project.video);
 ---
-<Layout title={project.value ? `${project.title}, ${project.location}` : project.title} description={`${project.description} A work record from M.M. Construction & Consults, ${project.location}.`}>
-  <PageHero label={project.title} title={project.title} text={project.description} image={project.image} alt={project.alt} parent="Projects" parentHref="/projects" />
+<Layout title={project.value ? `${project.title}, ${project.location}` : project.title} description={describe(project.description, `A project by M.M. Construction & Consults in ${project.location}.`)}>
+  <PageHero label={project.title} title={project.title} text={project.description} image={project.image} parent="Projects" parentHref="/projects/" />
 
   <section class="section">
     <div class="container content-grid">
@@ -40,8 +41,8 @@ const video = [...videos, ...projectClips].find((v) => v.id === project.video);
       <aside class="content-aside">
         <h2>Related service</h2>
         <p>{service.title} — {service.short}</p>
-        <a href={`/services/${service.slug}`}>Explore the service <Icon name="arrow-right" size={16} /></a>
-        <a class="button" href={`/contact?service=${encodeURIComponent(service.title)}`}>Discuss your project <Icon name="arrow-right" size={17} /></a>
+        <a href={`/services/${service.slug}/`}>Explore the service <Icon name="arrow-right" size={16} /></a>
+        <a class="button" href={`/contact/?service=${encodeURIComponent(service.title)}`}>Discuss your project <Icon name="arrow-right" size={17} /></a>
       </aside>
     </div>
   </section>
@@ -75,8 +76,8 @@ const video = [...videos, ...projectClips].find((v) => v.id === project.video);
 
   <section class="section light">
     <div class="container">
-      <SectionHeading label="More work" title="Other projects." href="/projects" link="Back to all projects" />
-      <ProjectGrid filters={false} limit={4} />
+      <SectionHeading label="More work" title="Other projects." href="/projects/" link="Back to all projects" />
+      <ProjectGrid filters={false} limit={4} items={projects.filter((p) => p.slug !== project.slug)} />
     </div>
   </section>
   <CTA />

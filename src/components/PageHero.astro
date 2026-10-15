@@ -1,18 +1,25 @@
 ---
 import Picture from './Picture.astro';
+import { breadcrumbSchema, jsonLd, type Crumb } from '../lib/seo';
 
-interface Props { label: string; title: string; text: string; image?: string; alt?: string; parent?: string; parentHref?: string }
+// The hero photograph is a dimmed background behind the heading, so it is decorative (alt="").
+interface Props { label: string; title: string; text: string; image?: string; parent?: string; parentHref?: string }
 const {
   label, title, text,
-  image = '/images/optimized/scaffold.webp',
-  alt = 'M.M. Construction building repair work with scaffolding',
+  image = '/images/projects/kapil-ratna-chs-1.webp',
   parent, parentHref,
 } = Astro.props;
 const headingLines = title.split(/<br\s*\/?>/);
+const crumbs: Crumb[] = [
+  { name: 'Home', path: '/' },
+  ...(parent && parentHref ? [{ name: parent, path: parentHref }] : []),
+  { name: label, path: Astro.url.pathname },
+];
 ---
+<script type="application/ld+json" set:html={jsonLd(breadcrumbSchema(crumbs))} />
 <section class="page-hero">
   <div class="page-hero-bg">
-    <Picture src={image} alt={alt} eager={true} sizes="100vw" />
+    <Picture src={image} alt="" eager={true} sizes="100vw" />
   </div>
   <div class="container page-hero-inner">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
